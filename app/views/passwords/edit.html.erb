@@ -1,0 +1,13 @@
+<h1>Reestablecimiento de contraseña</h1>
+<h2>Introduce la nueva contraseña:</h2>
+<%= form_for @user, url: :password do |f| %>
+  <%= f.password_field :password, placeholder: 'Contraseña nueva' %>
+  <% unless @user.errors[:password].blank? %>
+    <span><%= @user.errors[:password].join(', ') %></span>
+  <% end %>
+  <%= f.password_field :password_confirmation, placeholder: 'Repetir contraseña'  %>
+  <% unless @user.errors[:password_confirmation].blank? %>
+    <span><%= @user.errors[:password_confirmation].join(', ') %></span>
+  <% end %>
+  <%= f.submit 'Cambiar contraseña' %>
+<% end %>

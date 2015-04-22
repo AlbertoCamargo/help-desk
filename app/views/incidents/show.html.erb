@@ -1,0 +1,32 @@
+<h1>Incidents#show</h1>
+<p><%= @problem.title %></p>
+<p><%= @problem.description %></p>
+<p><%= @problem.user.full_name %></p>
+
+<table>
+  <tbody>
+    <% @solutions_incidents.each do |solutions_incident| %>
+      <tr>
+        <td><%= link_to solutions_incident.description %></td>
+        <td><%= solutions_incident.user.full_name %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Editar', edit_solutions_incident_path(solutions_incident) %></td>
+        <td><%= link_to 'Eliminar', solutions_incident_path(solutions_incident), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for @solutions_incident do |f| %>
+  <label>Description</label><br>
+  <%= f.text_area :description %><br>
+  <% unless @solutions_incident.errors[:description].blank? %>
+    <span><%= @solutions_incident.errors[:description].join(', ') %></span>
+  <% end %>
+  <%= f.hidden_field :incident_id, value: @incident.id %>
+  <%= f.submit 'Crear solucion a un incidente' %>
+<% end %>
+
+<p><%= link_to 'back', :home %><p>
+

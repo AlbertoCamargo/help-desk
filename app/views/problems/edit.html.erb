@@ -1,0 +1,15 @@
+<h1>Editar Problema</h1>
+<%= form_for @problem do |f| %>
+  <%= f.text_field :title, placeholder: 'Title' %>
+  <% unless @problem.errors[:title].blank? %>
+    <span><%= @problem.errors[:title].join(', ') %></span>
+  <% end %>
+  <br><br>
+  <label>Description</label><br>
+  <%= f.text_area :description %><br>
+  <% unless @problem.errors[:description].blank? %>
+    <span><%= @problem.errors[:description].join(', ') %></span>
+  <% end %><br>
+  <%= f.submit 'Editar problema' %>
+<% end %>
+<%= link_to 'back', :home %>

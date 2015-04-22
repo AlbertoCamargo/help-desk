@@ -1,0 +1,65 @@
+<h1>Homes#index</h1>
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+</br>
+<%= link_to 'Cerrar sesion', :logout, method: :delete %></Br></br>
+
+<title> Problemas </title>
+<table>
+  <thead>
+    <th>Titulo</th>
+  </thead>
+  <tbody>
+    <% @problems.each do |problem| %>
+      <tr>
+        <td><%= link_to problem.title, problem_path(problem) %></td>
+        <td><%= link_to 'Editar', edit_problem_path(problem) %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Eliminar', problem_path(problem), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<td><%= link_to 'Crear un problema', :new_problem %></td>
+
+<title> Incidentes </title>
+<table>
+  <thead>
+    <th>Estado</th>
+    <th>Titulo</th>
+  </thead>
+  <tbody>
+    <% @incidents.each do |incident| %>
+      <tr>
+        <td><%= link_to incident.title, incident_path(incident) %></td>
+        <td><%= link_to 'Editar', edit_incident_path(incident) %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Eliminar', incident_path(incident), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<td><%= link_to 'Crear un incidente', :new_incident %></td>
+
+<title> Sugerencias </title>
+<table>
+  <thead>
+    <th>Estado</th>
+    <th>Titulo</th>
+  </thead>
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= link_to request.title, request_path(request) %></td>
+        <td><%= link_to 'Editar', edit_request_path(request) %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Eliminar', request_path(request), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<td><%= link_to 'Crear una Sugerencia', :new_request %></td>

@@ -1,0 +1,31 @@
+<h1>Requests#show</h1>
+<p><%= @request.title %></p>
+<p><%= @problem.description %></p>
+<p><%= @problem.user.full_name %></p>
+
+<table>
+  <tbody>
+    <% @solutions_requests.each do |solutions_request| %>
+      <tr>
+        <td><%= link_to solutions_request.description %></td>
+        <td><%= solutions_request.user.full_name %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Editar', edit_solutions_request_path(solutions_request) %></td>
+        <td><%= link_to 'Eliminar', solutions_request_path(solutions_request), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_for @solutions_request do |f| %>
+  <label>Description</label><br>
+  <%= f.text_area :description %><br>
+  <% unless @solutions_request.errors[:description].blank? %>
+    <span><%= @solutions_request.errors[:description].join(', ') %></span>
+  <% end %>
+  <%= f.hidden_field :request_id, value: @request.id %>
+  <%= f.submit 'Crear solucion a una sugerencia' %>
+<% end %>
+
+<p><%= link_to 'back', :home %><p>
