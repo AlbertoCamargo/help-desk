@@ -46,4 +46,5 @@ group :development, :test do
 end
 
 gem 'sorcery'
+gem 'therubyracer'
 
