@@ -30,8 +30,7 @@ body {
  * Lista de Comentarios
  =======================*/
 .comments-container {
-  margin: 60px auto 15px;
-  width: 768px;
+  width: 100%;
 }
 
 .comments-container h1 {
@@ -90,7 +89,8 @@ body {
 
 
 .comments-list li {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   display: block;
   position: relative;
 }
@@ -106,8 +106,8 @@ body {
 .reply-list {
   padding-left: 88px;
   clear: both;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 /**
  * Avatar
@@ -148,9 +148,10 @@ body {
  * Caja del Comentario
  ---------------------------*/
 .comments-list .comment-box {
-  width: 680px;
-  float: right;
+  width: 90%;
+  float: left;
   position: relative;
+  margin-left: 15px;
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
   box-shadow: 0 1px 1px rgba(0,0,0,0.15);
@@ -176,7 +177,7 @@ body {
 }
 
 .reply-list .comment-box {
-  width: 610px;
+  width: 90%;
 }
 .comment-box .comment-head {
   background: #FCFCFC;
