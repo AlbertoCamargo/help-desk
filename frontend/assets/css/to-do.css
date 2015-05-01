@@ -117,12 +117,16 @@
   margin-bottom: 4px;
 }
 
-.task-content li.answer {
-  border-left: 20px solid #5CB85C;
+.task-content li.answered {
+  border-left: 20px solid #249C24;
 }
 
 .task-content li.unanswered {
-  border-left: 20px solid #D01818;
+  border-left: 20px solid #D8403C;
+}
+
+.task-content li.active {
+  border-left: 20px solid #3F4FA7;
 }
 
 .row {

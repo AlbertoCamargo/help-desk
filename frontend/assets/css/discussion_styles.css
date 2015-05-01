@@ -8,6 +8,18 @@ i.fa.fa-reply.fa-2x {
   font-size: 2.4em;
 }
 
+.sidebar-closed #main-content {
+  margin-left: 2%;
+}
+
+.wrapper {
+  display: inline-flex;
+  width: 98%;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+
  * {
   margin: 0;
   padding: 0;
@@ -184,7 +196,7 @@ div.comment-main-level {
 }
 
 .reply-list .comment-box {
-  width: 94.5%;
+  width: 90.5%;
 }
 .comment-box .comment-head {
   background: #FCFCFC;
@@ -201,7 +213,7 @@ div.comment-main-level {
   margin-left: 14px;
   position: relative;
   top: 4px;
-  color: #A6A6A6;
+  color: #4F4F4F;
   cursor: pointer;
   -webkit-transition: color 0.3s ease;
   -o-transition: color 0.3s ease;
