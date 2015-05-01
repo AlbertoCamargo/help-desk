@@ -4,6 +4,10 @@
  * Detalle: #c7cacb
  * Fondo: #dee1e3
  ----------------------------------*/
+i.fa.fa-reply.fa-2x {
+  font-size: 2.4em;
+}
+
  * {
   margin: 0;
   padding: 0;
@@ -29,7 +33,16 @@ body {
 /** ====================
  * Lista de Comentarios
  =======================*/
+div.comment-avatar  {
+  color: black;
+}
+
+div.comment-main-level {
+  padding-bottom: 15px;
+}
+
 .comments-container {
+  margin-top: 35px;
   width: 100%;
 }
 
@@ -45,7 +58,6 @@ body {
 }
 
 .comments-list {
-  margin-top: 30px;
   position: relative;
 }
 
@@ -55,7 +67,7 @@ body {
 .comments-list:before {
   content: '';
   width: 2px;
-  height: 100%;
+  height: 97%;
   background: #c7cacb;
   position: absolute;
   left: 32px;
@@ -67,10 +79,9 @@ body {
   position: absolute;
   background: #c7cacb;
   bottom: 0;
-  left: 27px;
+  left: 29px;
   width: 7px;
   height: 7px;
-  border: 3px solid #dee1e3;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
@@ -89,8 +100,6 @@ body {
 
 
 .comments-list li {
-  margin-bottom: 20px;
-  margin-top: 20px;
   display: block;
   position: relative;
 }
@@ -106,8 +115,6 @@ body {
 .reply-list {
   padding-left: 88px;
   clear: both;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 /**
  * Avatar
@@ -177,7 +184,7 @@ body {
 }
 
 .reply-list .comment-box {
-  width: 90%;
+  width: 94.5%;
 }
 .comment-box .comment-head {
   background: #FCFCFC;
@@ -193,7 +200,7 @@ body {
   float: right;
   margin-left: 14px;
   position: relative;
-  top: 10px;
+  top: 4px;
   color: #A6A6A6;
   cursor: pointer;
   -webkit-transition: color 0.3s ease;
@@ -222,7 +229,7 @@ body {
   color: #999;
   font-size: 13px;
   position: relative;
-  top: 1px;
+  top: 10px;
 }
 
 .comment-box .comment-content {
