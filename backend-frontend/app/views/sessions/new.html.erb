@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>Help Desk</title>
     <%= stylesheet_link_tag 'application' %>
   </head>
   <body>
-    <% if flash[:notice] %>
-    <p><%= flash[:notice] %></p>
-    <% end %>
     <div class="cont">
       <div class="demo">
         <div class="login">
           <div class="login__check"></div>
-          <%= form_tag :sessions, method: :post do %>
+          <%= form_tag :sessions, method: :post, remote: true do %>
             <div class="login__form">
               <div class="login__row">
                 <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
@@ -26,7 +23,7 @@
                 </svg>
                 <%= password_field_tag :password, nil, placeholder: 'Password', class: 'login__input pass' %>
               </div>
-              <%= submit_tag 'Sign in', class: 'login__submit' %>
+              <button value="sign in" type="button" class="login__submit">Sign in</button>
             </div>
           <% end %>
         </div>

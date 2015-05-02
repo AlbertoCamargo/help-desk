@@ -24,23 +24,34 @@ $(document).ready(function() {
     var that = this;
     ripple($(that), e);
     $(that).addClass("processing");
-    setTimeout(function() {
-      $login.removeClass('animated shake');
-      $(that).addClass("success");
-      setTimeout(function() {
-        $app.show();
-        $app.css("top");
-        $app.addClass("active");
-      }, submitPhase2 - 70);
-      setTimeout(function() {
-        // redirect_to home or dashboard
-        //$login.hide();
-        //$login.addClass("inactive");
-        $login.addClass('animated shake');
-        animating = false;
-        $(that).removeClass("success processing");
-      }, submitPhase2);
-    }, submitPhase1);
+    user = console.log($('#customer_id').val());
+    pass = console.log($('#password').val());
+    $.ajax({
+      type: "POST",
+      url: "sessions",
+      dataType: "json",
+      data: { customer_id: user, password: pass },
+      success: function(){
+        alert( "biennn" );
+      },
+      error: function() {
+          setTimeout(function() {
+          $login.removeClass('animated shake');
+          $(that).addClass("success");
+          setTimeout(function() {
+            $app.show();
+            $app.css("top");
+            $app.addClass("active");
+          }, submitPhase2 - 70);
+          setTimeout(function() {
+            $login.addClass('animated shake');
+            animating = false;
+            $(that).removeClass("success processing");
+          }, submitPhase2);
+        }, submitPhase1);
+      }
+    });
+    
   });
   
   $(document).on("click", ".app__logout", function(e) {

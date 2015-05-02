@@ -12,10 +12,11 @@ class SessionsController < ApplicationController
         redirect_to edit_password_path(current_user)
       else
         redirect_to :home, notice: 'Sesion iniciada'
-      end   
+      end
     else
       flash.now[:notice] = 'Error en usuario o contraseña'
-      render :new
+      #render :new
+      render :json => {:success => false}
     end
   end
 
