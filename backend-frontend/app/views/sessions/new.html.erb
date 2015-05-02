@@ -1,13 +1,37 @@
-<h1>Login</h1>
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
-<%= form_tag :sessions, method: :post do %>
-  <%= text_field_tag :customer_id, nil, placeholder: 'Customer id' %>
-  <br><br>
-  <%= password_field_tag :password, nil, placeholder: 'Password' %>
-  <br><br>
-  <%= check_box_tag :remember_me, nil %> Remember me
-  <br><br>
-  <%= submit_tag 'Login' %>
-<% end %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <%= stylesheet_link_tag 'application' %>
+  </head>
+  <body>
+    <% if flash[:notice] %>
+    <p><%= flash[:notice] %></p>
+    <% end %>
+    <div class="cont">
+      <div class="demo">
+        <div class="login">
+          <div class="login__check"></div>
+          <%= form_tag :sessions, method: :post do %>
+            <div class="login__form">
+              <div class="login__row">
+                <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
+                  <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8" />
+                </svg>
+                <%= text_field_tag :customer_id, nil, placeholder: 'Identification', class: 'login__input name' %>
+              </div>
+              <div class="login__row">
+                <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
+                  <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0" />
+                </svg>
+                <%= password_field_tag :password, nil, placeholder: 'Password', class: 'login__input pass' %>
+              </div>
+              <%= submit_tag 'Sign in', class: 'login__submit' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag 'application' %>
+  </body>
+</html>
