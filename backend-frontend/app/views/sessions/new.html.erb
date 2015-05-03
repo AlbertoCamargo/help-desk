@@ -3,13 +3,15 @@
   <head>
     <title>Help Desk</title>
     <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
   </head>
   <body>
     <div class="cont">
       <div class="demo">
         <div class="login">
           <div class="login__check"></div>
-          <%= form_tag :sessions, method: :post, remote: true do %>
+          <%= form_tag :sessions, method: :post, remote: true, autocomplete: 'off' do %>
             <div class="login__form">
               <div class="login__row">
                 <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
@@ -23,7 +25,7 @@
                 </svg>
                 <%= password_field_tag :password, nil, placeholder: 'Password', class: 'login__input pass' %>
               </div>
-              <button value="sign in" type="button" class="login__submit">Sign in</button>
+              <button class='login__submit'> Login</button>
             </div>
           <% end %>
         </div>

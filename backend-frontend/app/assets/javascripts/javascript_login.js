@@ -1,7 +1,7 @@
 $(document).ready(function() {
   
   var animating = false,
-      submitPhase1 = 1100,
+      submitPhase1 = 2000,
       submitPhase2 = 400,
       logoutPhase1 = 800,
       $login = $(".login"),
@@ -24,6 +24,22 @@ $(document).ready(function() {
     var that = this;
     ripple($(that), e);
     $(that).addClass("processing");
+    setTimeout(function() {
+          $login.removeClass('animated shake');
+          $(that).addClass("success");
+          setTimeout(function() {
+            $app.show();
+            $app.css("top");
+            $app.addClass("active");
+          }, submitPhase2 - 70);
+          setTimeout(function() {
+            $login.addClass('animated shake');
+            animating = false;
+            $(that).removeClass("success processing");
+          }, submitPhase2);
+        }, submitPhase1);
+        });    
+    /*
     user = console.log($('#customer_id').val());
     pass = console.log($('#password').val());
     $.ajax({
@@ -49,10 +65,11 @@ $(document).ready(function() {
             $(that).removeClass("success processing");
           }, submitPhase2);
         }, submitPhase1);
-      }
-    });
+        }
+    );
+      */
     
-  });
+  
   
   $(document).on("click", ".app__logout", function(e) {
     if (animating) return;

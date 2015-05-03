@@ -7,16 +7,20 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = login(params[:customer_id], params[:password], params[:remeber_me])
-      unless current_user.first_time
-        redirect_to edit_password_path(current_user)
+    respond_to do |format|
+      if user = login(params[:customer_id], params[:password], params[:remeber_me])
+        unless current_user.first_time
+          @url = edit_password_path(current_user)
+          # redirect_to edit_password_path(current_user)
+        else
+          # redirect_to :home, notice: 'Sesion iniciada'
+          @url = home_path
+        end
       else
-        redirect_to :home, notice: 'Sesion iniciada'
+        flash.now[:notice] = 'Error en usuario o contraseña'
+        #render :new
       end
-    else
-      flash.now[:notice] = 'Error en usuario o contraseña'
-      #render :new
-      render :json => {:success => false}
+      format.js
     end
   end
 
