@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
   layout :false
   skip_before_action :require_login, except: :destroy
 
