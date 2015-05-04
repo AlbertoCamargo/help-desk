@@ -5,8 +5,12 @@
  */
 
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
-#error-title,
-#error-description
+#error-title-incident,
+#error-description-incident,
+#error-title-request,
+#error-description-request,
+#error-title-problem,
+#error-description-problem
 {
   color: red;
 }
