@@ -20,6 +20,8 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
   <body>
     <!-- Modal -->
     <!-- End modal -->
@@ -136,12 +138,6 @@
       </div>
       </div>
     </section>
-    
-    <!-- js placed at the end of the document so the pages load faster -->
-    <!-- classie.js by @desandro: https://github.com/desandro/classie -->
     <%= javascript_include_tag 'home' %>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <!--script for this page-->
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
   </body>
 </html>
