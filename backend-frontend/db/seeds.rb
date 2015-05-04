@@ -12,6 +12,7 @@ if Rails.env.development?
       user.problems.build(title: Faker::Name.title, description: Faker::Lorem.paragraph((10..70).to_a.sample))
       user.incidents.build(title: Faker::Name.title, description: Faker::Lorem.paragraph((10..70).to_a.sample))
       user.requests.build(title: Faker::Name.title, description: Faker::Lorem.paragraph((10..70).to_a.sample))
+      user.save
     end
   end
 end
