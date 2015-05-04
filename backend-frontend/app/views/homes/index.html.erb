@@ -35,26 +35,25 @@
               <i class="fa fa-home"> </i>
             </a>
           </li>
-          <!-- settings start -->
           <li>
             <a href="index.html#">
               <i class="fa fa-user"> </i>
             </a>
           </li>
-          <!-- settings end -->
-          <!-- inbox dropdown start-->
           <li id="header_inbox_bar" class="dropdown">
               <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                 <i class="fa fa-envelope-o"></i>
              </a>
           </li>
-                <!-- inbox dropdown end -->
-            </ul>
-            <!--  notification end -->
+        </ul>
         </div>
         <div class="top-menu">
           <ul class="nav pull-right top-menu">
-            <li><a class="logout" href="#"><i class="fa fa-sign-out fa-1x"></i><%= link_to '', :logout, method: :delete %></a></li>
+            <li>
+              <a class="logout" href= <%= :logout%>  data-method="delete">
+                <i class="fa fa-sign-out fa-1x"> </i>
+              </a>
+            </li>
           </ul>
         </div>
       </header>
