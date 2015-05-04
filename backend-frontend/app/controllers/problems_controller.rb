@@ -14,13 +14,16 @@ class ProblemsController < ApplicationController
     @problem = Problem.new
   end
 
-  def create
-    @problem = current_user.problems.build(problem_params)
-    if @problem.save
-      redirect_to :home, notice: 'El problema se ha creado satisfactoriamente'
-    else
-      flash.now[:notice] = 'Error al crear el problema'
-      render :new
+  def create 
+    respond_to do |format|
+      @problem = current_user.problems.build(problem_params)
+      if @problem.save
+        @url = :home
+        #redirect_to :home, notice: 'El problema se ha creado satisfactoriamente'
+      end
+        #flash.now[:notice] = 'Error al crear el problema'
+        #redirect_to :home
+      format.js
     end
   end
 

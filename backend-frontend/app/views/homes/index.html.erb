@@ -24,6 +24,30 @@
     <%= csrf_meta_tags %>
   <body>
     <!-- Modal -->
+    <div class="md-modal md-effect-8" id="modal-8">
+      <div class="md-content">
+        <div class="form-panel">
+          <h3 class="mb">Incidentes</h3>
+          <%= form_for(@problem, remote: true) do |f| %>
+            <form class="form-horizontal tasi-form" method="get">
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2">Titulo</label>
+                <%= f.text_field(:title, class: 'form-control') %>
+                <span id="error"></span>
+              </div>
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
+                <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
+              </div>
+              <div>
+              <button  type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+            </form>            
+              <button type="button" class="md-close"><i class="fa fa-times"></i> Cancelar</button>        
+            </div>
+          <% end %> 
+        </div>
+      </div>
+    </div>
     <!-- End modal -->
     <section id="container" class="sidebar-closed container" >
       <header class="header black-bg">
