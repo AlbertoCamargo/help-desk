@@ -15,12 +15,15 @@ class IncidentsController < ApplicationController
   end
 
   def create
-    @incident = current_user.incidents.build(params_incident)
-    if @incident.save
-      redirect_to :home, notice: 'El incidente se ha creado correctamente'
-    else
-      flash.now[:notice] = 'Error el crear el incidente'
-      render :new
+    respond_to do |format|
+      @incident = current_user.incidents.build(params_incident)
+      if @incident.save
+        @url = :home
+        #redirect_to :home, notice: 'El incidente se ha creado correctamente'
+      end
+        #flash.now[:notice] = 'Error el crear el incidente'
+        #render :new
+      format.js
     end
   end
 
