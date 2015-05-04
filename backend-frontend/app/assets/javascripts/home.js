@@ -11,8 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require boostrap.min
 //= require classie
-//= require  modalEffects
 //= require jquery.dcjqaccordion.2.7
 //= require jquery.scrollTo.min
+//= require jquery.nicescroll.js
 //= require common-scripts
+//= require jquery-ui
+//= require modalEffects
