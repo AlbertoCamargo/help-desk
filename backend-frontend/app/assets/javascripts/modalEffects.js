@@ -52,11 +52,7 @@ var ModalEffects = (function() {
 
 })();
 
-// fail try. 
-/*
-  $(document).click(function(event) {
-  if($("#modal-8").hasClass('md-show')) {
-    console.log(event.target)
-  }
-  });
-*/
+function clear_span(){
+	$('span').text('')
+}
+

@@ -41,9 +41,10 @@
                 <span id="error-description"></span>
               </div>
               <div>
-              <button  type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
             </form>            
-              <button type="button" class="md-close"><i class="fa fa-times"></i> Cancelar</button>        
+                
             </div>
           <% end %> 
         </div>
@@ -75,7 +76,7 @@
         <div class="top-menu">
           <ul class="nav pull-right top-menu">
             <li>
-              <a class="logout" href= <%= :logout%>  data-method="delete">
+              <a class="logout" href= <%= :logout %>  data-method="delete">
                 <i class="fa fa-sign-out fa-1x"> </i>
               </a>
             </li>
@@ -99,8 +100,8 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to request.title, request_path(request) %></span>
                             <div class="pull-right hidden-phone">
-                              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"><%= link_to '', edit_request_path(request) %></i></button>
-                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "><%= link_to '', request_path(request), method: :delete %></i></button>
+                              <a href=<%= edit_request_path(request) %>><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                              <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                             </div>
                           </div>
                       </li>
@@ -124,8 +125,8 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to incident.title, incident_path(incident) %></span>
                             <div class="pull-right hidden-phone">
-                              <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"><%= link_to '', edit_incident_path(incident) %></i></button>
-                              <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "><%= link_to '', incident_path(incident), method: :delete %></i></button>
+                              <a href=<%= edit_incident_path(incident) %>><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                              <a href=<%=incident_path(incident)%> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                             </div>
                           </div>
                       </li>
@@ -149,8 +150,8 @@
                         <div class="task-title">
                           <span class="task-title-sp"><%= link_to problem.title, problem_path(problem) %></span>
                           <div class="pull-right hidden-phone">
-                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"><%= link_to '', edit_problem_path(problem) %></i></button>
-                            <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "><%= link_to '', problem_path(problem), method: :delete %></i></button>
+                            <a href=<%= edit_problem_path(problem) %>><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                            <a href=<%= problem_path(problem) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                           </div>
                         </div>
                     </li>
