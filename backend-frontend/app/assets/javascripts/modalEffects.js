@@ -30,7 +30,11 @@ var ModalEffects = (function() {
 			}
 
 			el.addEventListener( 'click', function( ev ) {
-				classie.add( modal, 'md-show' );
+				$('div').removeClass('md-show');
+				setTimeout(function(){
+					classie.add( modal, 'md-show' );	
+				}, 10)			
+				
 
 				if( classie.has( el, 'md-setperspective' ) ) {
 					setTimeout( function() {
@@ -55,4 +59,6 @@ var ModalEffects = (function() {
 function clear_span(){
 	$('span').text('')
 }
+
+
 
