@@ -22,7 +22,7 @@ class ProblemsController < ApplicationController
         #redirect_to :home, notice: 'El problema se ha creado satisfactoriamente'
       end
         #flash.now[:notice] = 'Error al crear el problema'
-        #redirect_to :home
+        #redirect_to :new
       format.js
     end
   end

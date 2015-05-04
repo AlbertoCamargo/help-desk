@@ -1,0 +1,8 @@
+
+url = '<%= @url %>'
+if (<%= !@request.errors.empty? %>) {
+  $('#error-title').html(function() { return  "<%= @request.errors[:title].join(', ') %>" })
+  $('#error-description').html(function() { return  "<%= @request.errors[:description].join(', ') %>" })
+}else{
+  window.location.href = url
+}

@@ -7,5 +7,7 @@ class HomesController < ApplicationController
     @incidents = current_user.is_customer? ? current_user.incidents : Incident.all
     @requests = current_user.is_customer? ? current_user.requests : Request.all
     @problem = Problem.new
+    @request = Request.new
+    @incident = Incident.new
   end
 end

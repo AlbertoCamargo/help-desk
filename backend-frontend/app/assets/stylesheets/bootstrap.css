@@ -5,7 +5,8 @@
  */
 
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
-#error
+#error-title,
+#error-description
 {
   color: red;
 }

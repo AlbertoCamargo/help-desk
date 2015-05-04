@@ -15,12 +15,15 @@ class RequestsController < ApplicationController
   end
 
   def create
-    @request = current_user.requests.build(params_request)
-    if @request.save
-      redirect_to :home, notice: 'La sugerencia se ha creado correctamente' 
-    else
-      flash.now[:notice] = 'Error al crear la sugerencia'
-      render :new
+    respond_to do |format|
+      @request = current_user.requests.build(params_request)
+      if @request.save
+        @url = :home
+        #redirect_to :home, notice: 'La sugerencia se ha creado correctamente' 
+      end
+        #flash.now[:notice] = 'Error al crear la sugerencia'
+        #render :new
+      format.js  
     end
   end
 
