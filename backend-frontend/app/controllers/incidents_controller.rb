@@ -1,6 +1,6 @@
 class IncidentsController < ApplicationController
   
-  before_action :find_incident, except: [:show, :new, :create]
+  before_action :find_incident, only: [:update, :destroy]
 
   def show
     @incident = current_user.is_customer? ? current_user.incidents.find(params[:id]) : Incident.find(params[:id])
@@ -11,7 +11,10 @@ class IncidentsController < ApplicationController
   end
 
   def new
-    @incident = Incident.new
+    respond_to do |format|
+      @incident = Incident.new
+      format.js  
+    end
   end
 
   def create
@@ -19,24 +22,25 @@ class IncidentsController < ApplicationController
       @incident = current_user.incidents.build(params_incident)
       if @incident.save
         @url = :home
-        #redirect_to :home, notice: 'El incidente se ha creado correctamente'
       end
-        #flash.now[:notice] = 'Error el crear el incidente'
-        #render :new
       format.js
     end
   end
 
   def edit
+    respond_to do |format|
+      @incident = current_user.incidents.find(params[:id])
+      format.js
+    end
   end
 
   def update
-    @incident.assign_attributes(params_incident)
-    if @incident.save
-      redirect_to :home, notice: 'Se ha actualizado correctamente el incidente'
-    else
-      flash.now[:notcie] = 'Error al actualizar el incidente'
-      render :edit
+    respond_to do |format|
+      @incident.assign_attributes(params_incident)
+      if @incident.save
+        @url = :home
+      end
+      format.js
     end
   end
 

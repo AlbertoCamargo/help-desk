@@ -55,7 +55,9 @@ var ModalEffects = (function() {
 })();
 
 function clear_span(){
-  $('span').text('')
+  $('.form-panel span').text('')
+  $('.form-panel #request_title').val('')
+  $('.form-panel #request_description').val('')
 }
 
 

@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   
-  before_action :find_request, except: [:show, :new, :create]
+  before_action :find_request, only: [:update, :destroy]
 
   def show
     @request = current_user.is_customer? ? current_user.requests.find(params[:id]) : Request.find(params[:id])
@@ -11,7 +11,10 @@ class RequestsController < ApplicationController
   end
 
   def new
-    @request = Request.new
+    respond_to do |format|
+      @request = Request.new
+      format.js
+    end
   end
 
   def create
@@ -19,24 +22,25 @@ class RequestsController < ApplicationController
       @request = current_user.requests.build(params_request)
       if @request.save
         @url = :home
-        #redirect_to :home, notice: 'La sugerencia se ha creado correctamente' 
       end
-        #flash.now[:notice] = 'Error al crear la sugerencia'
-        #render :new
       format.js  
     end
   end
 
   def edit
+    respond_to do |format|
+      @request = current_user.requests.find(params[:id])
+      format.js
+    end
   end
 
   def update
-    @request.assign_attributes(params_request)
-    if @request.save
-      redirect_to :home, notice: 'Se ha actualizado correctamente la sugerencia'
-    else
-      flash.now[:notice] = 'Error al actualizar al sugerencia'
-      render :edit
+    respond_to do |format|
+      @request.assign_attributes(params_request)
+      if @request.save
+        @url = :home
+      end
+      format.js
     end
   end
 

@@ -77,7 +77,7 @@
     <div class="md-modal md-effect-8" id="modal-10">
       <div class="md-content">
         <div class="form-panel">
-          <h3 class="mb">Sugerencias</h3>
+          <h3 class="mb">Problemas</h3>
           <%= form_for(@problem, remote: true) do |f| %>
             <form class="form-horizontal tasi-form" method="get">
               <div class="form-group has-success">
@@ -138,7 +138,7 @@
             <div class="panel-heading">
                 <div class="pull-left"><h5><i class="fa fa-tasks"></i> Sugerencias</h5></div><br>
                 <div class="pull-right hidden-phone"> 
-                  <button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-plus"><%= link_to '', :new_request %></i></button>
+                  <a href='/requests/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-plus"></i></button></a>
                 </div>
             </div>
             <div class="panel-body">
@@ -149,7 +149,7 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to request.title, request_path(request) %></span>
                             <div class="pull-right hidden-phone">
-                              <a href=<%= edit_request_path(request) %>><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                              <a href="/requests/<%= request.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-pencil"></i></button></a>
                               <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                             </div>
                           </div>
@@ -163,7 +163,7 @@
               <div class="panel-heading">
                   <div class="pull-left"><h5><i class="fa fa-tasks"></i>Incidentes</h5> </div><br>
                   <div class="pull-right hidden-phone"> 
-                    <button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"> <i class="fa fa-plus"><%= link_to '', :new_incident %></i></button>
+                    <a href='/incidents/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"> <i class="fa fa-plus"></i></button></a>
                   </div>
               </div>
               <div class="panel-body">
@@ -174,7 +174,7 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to incident.title, incident_path(incident) %></span>
                             <div class="pull-right hidden-phone">
-                              <a href=<%= edit_incident_path(incident) %>><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                              <a href="/incidents/<%= incident.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"><i class="fa fa-pencil"></i></button></a>
                               <a href=<%=incident_path(incident)%> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                             </div>
                           </div>
@@ -188,7 +188,7 @@
             <div class="panel-heading">
                 <div class="pull-left"><h5><i class="fa fa-tasks"></i> Problemas</h5></div><br>
                 <div class="pull-right hidden-phone"> 
-                  <button  class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-plus"><%= link_to '', :new_problem %></i></button>
+                  <a href='/problems/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-plus"></i></button></a>
                 </div>
             </div>
             <div class="panel-body">
@@ -199,7 +199,7 @@
                         <div class="task-title">
                           <span class="task-title-sp"><%= link_to problem.title, problem_path(problem) %></span>
                           <div class="pull-right hidden-phone">
-                            <a href=<%= edit_problem_path(problem) %>><button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button></a>
+                            <a href="/problems/<%= problem.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-pencil"></i></button></a>
                             <a href=<%= problem_path(problem) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                           </div>
                         </div>
