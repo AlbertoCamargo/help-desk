@@ -11,7 +11,7 @@
         <td><%= solutions_problem.user.full_name %></td>
         <% unless current_user.is_customer? %>
         <td><%= link_to 'Editar', edit_solutions_problem_path(solutions_problem) %></td>
-        <td><%= link_to 'Eliminar', solutions_problem_path(solutions_problem), method: :delete %></td>
+        <td><%= link_to 'Eliminar', solutions_problem_path(solutions_problem, problem_id: @problem.id), method: :delete %></td>
         <% end %>
       </tr>
     <% end %>

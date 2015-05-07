@@ -1,0 +1,2 @@
+module CommentsIncidentsHelper
+end

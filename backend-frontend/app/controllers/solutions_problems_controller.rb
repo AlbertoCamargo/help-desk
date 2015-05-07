@@ -12,7 +12,7 @@ class SolutionsProblemsController < ApplicationController
   def create
     @solutions_problem = current_user.solutions_problems.build(params_solutions_problem)
     if @solutions_problem.save
-      #change_response_problem(params[:solutions_problem][:problem_id])
+      change_state_problem(@solutions_problem)
       redirect_to problem_path(params[:solutions_problem][:problem_id]), notice: 'La solucion del problema se ha creado correctamente'
     else
       flash.now[:notice] = 'Error al crear la solucion'
@@ -35,7 +35,7 @@ class SolutionsProblemsController < ApplicationController
 
   def destroy
     @solutions_problem.destroy
-    redirect_to problem_path(params[:solutions_problem][:problem_id]), notice: 'La solucion del problema se ha eliminado correctamente'
+    redirect_to problem_path(params[:problem_id]), notice: 'La solucion del problema se ha eliminado correctamente'
   end
 
   private
@@ -47,9 +47,9 @@ class SolutionsProblemsController < ApplicationController
     params.require(:solutions_problem).permit(:description, :problem_id)
   end
 
-  def change_response_problem(problem_id)
-    incidend = Problem.find(problem_id)
-    problem.assign_attributes(response: true)
+  def change_state_problem(solutions_problem)
+    problem = solutions_problem.problem
+    problem.assign_attributes(state: 'active')
     problem.save
   end
 end

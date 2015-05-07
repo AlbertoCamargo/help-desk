@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :solutions_problems,  except: :index
   resources :solutions_incidents, except: :index
   resources :solutions_requests,  except: :index
+  resources :comments_requests,   except: [:index, :show]
+  resources :comments_problems,   except: [:index, :show]
+  resources :comments_incidents,  except: [:index, :show]
 
   get 'home' => 'homes#index',           as: :home
   get 'login' => 'sessions#new',         as: :login

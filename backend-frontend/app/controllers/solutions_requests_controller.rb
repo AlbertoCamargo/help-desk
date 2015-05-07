@@ -12,6 +12,7 @@ class SolutionsRequestsController < ApplicationController
   def create
     @solutions_request = current_user.solutions_requests.build(params_solutions_request)
     if @solutions_request.save
+      change_state_request(@solutions_request)
       redirect_to request_path(params[:solutions_request][:request_id]), notice: 'La solucion de la sugerencia se ha creado correctamente'
     else
       flash.now[:notice] = 'Error al crear la solucion'
@@ -34,7 +35,7 @@ class SolutionsRequestsController < ApplicationController
 
   def destroy
     @solutions_request.destroy
-    redirect_to request_path(params[:solutions_request][:request_id]), notice: 'La solucion de la sugerencia se ha eliminado correctamente'
+    redirect_to request_path(params[:request_id]), notice: 'La solucion de la sugerencia se ha eliminado correctamente'
   end
 
   private
@@ -46,9 +47,9 @@ class SolutionsRequestsController < ApplicationController
     params.require(:solutions_request).permit(:description, :request_id)
   end
 
-  def change_response_request(request_id)
-    incidend = Request.find(request_id)
-    request.assign_attributes(response: true)
+  def change_state_request(solutions_request)
+    request = solutions_request.request
+    request.assign_attributes(state: 'active')
     request.save
   end
 end

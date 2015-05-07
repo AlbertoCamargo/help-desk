@@ -4,6 +4,7 @@ class CreateProblems < ActiveRecord::Migration
       t.string :title,      null: false
       t.text :description,  null: false
       t.string :file
+      t.string :state,      default: 'unanswered'
       t.references :user,   null: false,  index: true
 
       t.timestamps null: false

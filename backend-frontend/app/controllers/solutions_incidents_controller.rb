@@ -12,7 +12,7 @@ class SolutionsIncidentsController < ApplicationController
   def create
     @solutions_incident = current_user.solutions_incidents.build(params_solutions_incident)
     if @solutions_incident.save
-      #change_response_incident(params[:solutions_incident][:incident_id])
+      change_state_incident(@solutions_incident, 'active')
       redirect_to incident_path(params[:solutions_incident][:incident_id]), notice: 'La solucion del incidente se ha creado correctamente'
     else
       flash.now[:notice] = 'Error al crear la solucion'
@@ -35,7 +35,7 @@ class SolutionsIncidentsController < ApplicationController
 
   def destroy
     @solutions_incident.destroy
-    redirect_to incident_path(params[:solutions_incident][:incident_id]), notice: 'La solucion del incidente se ha eliminado correctamente'
+    redirect_to incident_path(params[:incident_id]), notice: 'La solucion del incidente se ha eliminado correctamente'
   end
 
   private
@@ -47,9 +47,9 @@ class SolutionsIncidentsController < ApplicationController
     params.require(:solutions_incident).permit(:description, :incident_id)
   end
 
-  def change_response_incident(incident_id)
-    incidend = Incident.find(incident_id)
-    incident.assign_attributes(response: true)
+  def change_state_incident(solutions_incident, state)
+    incidend = solutions_incident.incident
+    incident.assign_attributes(state: state)
     incident.save
   end
 end

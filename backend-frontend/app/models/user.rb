@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :solutions_problems,  dependent: :delete_all
   has_many :solutions_incidents, dependent: :delete_all
   has_many :solutions_requests,  dependent: :delete_all
+  has_many :comments_problems,   dependent: :delete_all
+  has_many :comments_incidents,  dependent: :delete_all
+  has_many :comments_requests,   dependent: :delete_all
 
   validates :customer_id, :email, :full_name, :phone, :rank, :password, :password_confirmation, presence: true
   validates :customer_id, :email, uniqueness: true

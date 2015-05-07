@@ -11,37 +11,73 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 7) do
+ActiveRecord::Schema.define(version: 10) do
 
-  create_table "incidents", force: :cascade do |t|
-    t.string   "title",       null: false
+  create_table "comments_incidents", force: :cascade do |t|
     t.text     "description", null: false
-    t.string   "file"
     t.integer  "user_id",     null: false
+    t.integer  "incident_id", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  add_index "comments_incidents", ["incident_id"], name: "index_comments_incidents_on_incident_id"
+  add_index "comments_incidents", ["user_id"], name: "index_comments_incidents_on_user_id"
+
+  create_table "comments_problems", force: :cascade do |t|
+    t.text     "description", null: false
+    t.integer  "user_id",     null: false
+    t.integer  "problem_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "comments_problems", ["problem_id"], name: "index_comments_problems_on_problem_id"
+  add_index "comments_problems", ["user_id"], name: "index_comments_problems_on_user_id"
+
+  create_table "comments_requests", force: :cascade do |t|
+    t.text     "description", null: false
+    t.integer  "user_id",     null: false
+    t.integer  "request_id",  null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "comments_requests", ["request_id"], name: "index_comments_requests_on_request_id"
+  add_index "comments_requests", ["user_id"], name: "index_comments_requests_on_user_id"
+
+  create_table "incidents", force: :cascade do |t|
+    t.string   "title",                              null: false
+    t.text     "description",                        null: false
+    t.string   "file"
+    t.string   "state",       default: "unanswered"
+    t.integer  "user_id",                            null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "incidents", ["user_id"], name: "index_incidents_on_user_id"
 
   create_table "problems", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.text     "description", null: false
+    t.string   "title",                              null: false
+    t.text     "description",                        null: false
     t.string   "file"
-    t.integer  "user_id",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "state",       default: "unanswered"
+    t.integer  "user_id",                            null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "problems", ["user_id"], name: "index_problems_on_user_id"
 
   create_table "requests", force: :cascade do |t|
-    t.string   "title",       null: false
-    t.text     "description", null: false
+    t.string   "title",                              null: false
+    t.text     "description",                        null: false
     t.string   "file"
-    t.integer  "user_id",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "state",       default: "unanswered"
+    t.integer  "user_id",                            null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "requests", ["user_id"], name: "index_requests_on_user_id"

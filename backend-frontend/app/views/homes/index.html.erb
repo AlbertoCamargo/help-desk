@@ -145,7 +145,7 @@
                 <div class="task-content">
                   <ul class="task-list">
                   <% @requests.each do |request| %>
-                      <li class="answered">
+                      <li class=<%= request.state %>>
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to request.title, request_path(request) %></span>
                             <div class="pull-right hidden-phone">
@@ -170,7 +170,7 @@
                 <div class="task-content">
                   <ul class="task-list">
                   <% @incidents.each do |incident| %>
-                      <li class="answered">
+                      <li class=<%= incident.state %>>
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to incident.title, incident_path(incident) %></span>
                             <div class="pull-right hidden-phone">
@@ -195,7 +195,7 @@
                 <div class="task-content">
                   <ul class="task-list">
                   <% @problems.each do |problem| %>
-                    <li class="unanswered">
+                    <li class=<%= problem.state %>>
                         <div class="task-title">
                           <span class="task-title-sp"><%= link_to problem.title, problem_path(problem) %></span>
                           <div class="pull-right hidden-phone">
