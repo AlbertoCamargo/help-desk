@@ -3,6 +3,7 @@
 <p><%= @incident.description %></p>
 <p><%= @incident.user.full_name %></p>
 
+<!-- INDEX DE SOLUTIONS -->
 <table>
   <tbody>
     <% @solutions_incidents.each do |solutions_incident| %>
@@ -18,6 +19,23 @@
   </tbody>
 </table>
 
+<!-- INDEX DE COMMENTS -->
+<table>
+  <tbody>
+    <% @comments_incidents.each do |comments_incident| %>
+      <tr>
+        <td><%= link_to comments_incident.description %></td>
+        <td><%= comments_incident.user.full_name %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Editar', edit_comments_incident_path(comments_incident) %></td>
+        <td><%= link_to 'Eliminar', comments_incident_path(comments_incident, incident_id: @incident.id), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<!-- MODAL DE SOLUTIONS -->
 <%= form_for @solutions_incident do |f| %>
   <label>Description</label><br>
   <%= f.text_area :description %><br>
@@ -26,6 +44,17 @@
   <% end %>
   <%= f.hidden_field :incident_id, value: @incident.id %>
   <%= f.submit 'Crear solucion a un incidente' %>
+<% end %>
+
+<!-- MODAL DE COMMENTS -->
+<%= form_for @comments_incident do |f| %>
+  <label>Description</label><br>
+  <%= f.text_area :description %><br>
+  <% unless @solutions_incident.errors[:description].blank? %>
+    <span><%= @solutions_incident.errors[:description].join(', ') %></span>
+  <% end %>
+  <%= f.hidden_field :incident_id, value: @incident.id %>
+  <%= f.submit 'Crear comentario a un incidente' %>
 <% end %>
 
 <p><%= link_to 'back', :home %><p>

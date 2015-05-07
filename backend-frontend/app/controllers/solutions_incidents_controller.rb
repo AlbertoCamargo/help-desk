@@ -48,7 +48,7 @@ class SolutionsIncidentsController < ApplicationController
   end
 
   def change_state_incident(solutions_incident, state)
-    incidend = solutions_incident.incident
+    incident = solutions_incident.incident
     incident.assign_attributes(state: state)
     incident.save
   end

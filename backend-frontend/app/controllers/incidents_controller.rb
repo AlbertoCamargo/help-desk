@@ -7,6 +7,8 @@ class IncidentsController < ApplicationController
     if @incident
       @solutions_incidents = @incident.solutions_incidents 
       @solutions_incident = SolutionsIncident.new
+      @comments_incidents = @incident.comments_incidents
+      @comments_incident = CommentsIncident.new
     end
   end
 

@@ -24,11 +24,22 @@ class CommentsIncidentsController < ApplicationController
   end
 
   def update
+    incident_id = params[:comments_incident][:incident_id]
+    if Incident.find(incident_id).user = current_user || current_user.is_sa?
+      @comments_incident.assign_attributes(params_comments_incident)
+      if @comments_incident.save
+        redirect_to incident_path(incident_id)
+      else
+        render :edit
+      end
+    else
+      render :edit
+    end
   end
 
   def destroy
     @comments_incident.destroy
-    redirect_to incident_path(params[:comments_incident][:incident_id])
+    redirect_to incident_path([:incident_id])
   end
 
   private
