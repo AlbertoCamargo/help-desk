@@ -1,5 +1,6 @@
 class CommentsRequestsController < ApplicationController
-    before_action :find_comments_request, except: [:new, :create]
+  
+  before_action :find_comments_request, except: [:new, :create]
 
   def new
     @comments_request = CommentsRequest.new
@@ -7,7 +8,7 @@ class CommentsRequestsController < ApplicationController
 
   def create
     request_id = params[:comments_request][:request_id]
-    if request.find(request_id).user == current_user || current_user.is_sa?
+    if current_user.creator_cases?(request_id, 'request') || current_user.is_sa? || current_user.is_admin?
        @comments_request = current_user.comments_requests.build(params_comments_request)
       if @comments_request.save
         redirect_to request_path(request_id)
@@ -24,7 +25,7 @@ class CommentsRequestsController < ApplicationController
 
   def update
     request_id = params[:comments_request][:request_id]
-    if request.find(request_id).user = current_user || current_user.is_sa?
+    if current_user.creator_cases?(request_id, 'request') || current_user.is_sa? || current_user.is_admin?
       @comments_request.assign_attributes(params_comments_request)
       if @comments_request.save
         redirect_to request_path(request_id)
@@ -38,7 +39,7 @@ class CommentsRequestsController < ApplicationController
 
   def destroy
     @comments_request.destroy
-    redirect_to request_path([:request_id])
+    redirect_to request_path(params[:request_id])
   end
 
   private
@@ -50,4 +51,4 @@ class CommentsRequestsController < ApplicationController
     params.require(:comments_request).permit(:description, :request_id)
   end
 end
-end
+

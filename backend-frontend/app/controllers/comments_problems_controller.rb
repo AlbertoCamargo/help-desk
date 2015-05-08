@@ -8,7 +8,7 @@ class CommentsProblemsController < ApplicationController
 
   def create
     problem_id = params[:comments_problem][:problem_id]
-    if problem.find(problem_id).user == current_user || current_user.is_sa?
+    if current_user.creator_cases?(problem_id, 'problem') || current_user.is_sa? || current_user.is_admin?
        @comments_problem = current_user.comments_problems.build(params_comments_problem)
       if @comments_problem.save
         redirect_to problem_path(problem_id)
@@ -25,7 +25,7 @@ class CommentsProblemsController < ApplicationController
 
   def update
     problem_id = params[:comments_problem][:problem_id]
-    if problem.find(problem_id).user = current_user || current_user.is_sa?
+    if current_user.creator_cases?(problem_id, 'problem') || current_user.is_sa? || current_user.is_admin?
       @comments_problem.assign_attributes(params_comments_problem)
       if @comments_problem.save
         redirect_to problem_path(problem_id)
@@ -39,7 +39,7 @@ class CommentsProblemsController < ApplicationController
 
   def destroy
     @comments_problem.destroy
-    redirect_to problem_path([:problem_id])
+    redirect_to problem_path(params[:problem_id])
   end
 
   private

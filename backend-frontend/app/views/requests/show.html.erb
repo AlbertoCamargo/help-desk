@@ -5,43 +5,27 @@
 
 <table>
   <tbody>
-    <% @solutions_requests.each do |solutions_request| %>
-      <tr>
-        <td><%= link_to solutions_request.description %></td>
-        <td><%= solutions_request.user.full_name %></td>
-        <% unless current_user.is_customer? %>
-        <td><%= link_to 'Editar', edit_solutions_request_path(solutions_request) %></td>
-        <td><%= link_to 'Eliminar', solutions_request_path(solutions_request, request_id: @request.id), method: :delete %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<table>
-  <tbody>
     <% @comments_requests.each do |comments_request| %>
-      <tr>
-        <td><%= link_to comments_request.description %></td>
-        <td><%= comments_request.user.full_name %></td>
-        <% unless current_user.is_customer? %>
-        <td><%= link_to 'Editar', edit_comments_request_path(comments_request) %></td>
-        <td><%= link_to 'Eliminar', comments_request_path(comments_request, request_id: @request.id), method: :delete %></td>
-        <% end %>
-      </tr>
+      <% if current_user.creator_comments?(comments_request.id, 'request') %>
+          <!--  AUTHOR -->
+        <tr>
+          <td><%= link_to comments_request.description %></td>
+          <td><%= comments_request.user.full_name %></td>
+          <td><%= link_to 'Editar', edit_comments_request_path(comments_request) %></td>
+          <td><%= link_to 'Eliminar', comments_request_path(comments_request, request_id: @request.id), method: :delete %></td>
+        </tr>
+      <% else %>
+        <!--  NO AUTHOR -->
+        <tr>
+          <td><%= link_to comments_request.description %></td>
+          <td><%= comments_request.user.full_name %></td>
+          <td><%= link_to 'Editar', edit_comments_request_path(comments_request) %></td>
+          <td><%= link_to 'Eliminar', comments_request_path(comments_request, request_id: @request.id), method: :delete %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
-
-<%= form_for @solutions_request do |f| %>
-  <label>Description</label><br>
-  <%= f.text_area :description %><br>
-  <% unless @solutions_request.errors[:description].blank? %>
-    <span><%= @solutions_request.errors[:description].join(', ') %></span>
-  <% end %>
-  <%= f.hidden_field :request_id, value: @request.id %>
-  <%= f.submit 'Crear solucion a una sugerencia' %>
-<% end %>
 
 <%= form_for @comments_request do |f| %>
   <label>Description</label><br>
@@ -50,7 +34,11 @@
     <span><%= @comments_request.errors[:description].join(', ') %></span>
   <% end %>
   <%= f.hidden_field :request_id, value: @request.id %>
-  <%= f.submit 'Crear solucion a una sugerencia' %>
+  <%= f.submit 'Crear commentario a una sugerencia' %>
 <% end %>
 
 <p><%= link_to 'back', :home %><p>
+
+<!-- BOTON DE CERRAR -->
+<%  if current_user.creator_cases?(@request.id, 'request') %>
+<% end %>

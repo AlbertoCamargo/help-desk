@@ -8,7 +8,7 @@ class CommentsIncidentsController < ApplicationController
 
   def create
     incident_id = params[:comments_incident][:incident_id]
-    if Incident.find(incident_id).user == current_user || current_user.is_sa?
+    if current_user.creator_cases?(incident_id, 'incident') || current_user.is_sa? || current_user.is_admin?
        @comments_incident = current_user.comments_incidents.build(params_comments_incident)
       if @comments_incident.save
         redirect_to incident_path(incident_id)
@@ -25,7 +25,7 @@ class CommentsIncidentsController < ApplicationController
 
   def update
     incident_id = params[:comments_incident][:incident_id]
-    if Incident.find(incident_id).user = current_user || current_user.is_sa?
+    if current_user.creator_cases?(incident_id, 'incident') || current_user.is_sa? || current_user.is_admin?
       @comments_incident.assign_attributes(params_comments_incident)
       if @comments_incident.save
         redirect_to incident_path(incident_id)
@@ -39,7 +39,7 @@ class CommentsIncidentsController < ApplicationController
 
   def destroy
     @comments_incident.destroy
-    redirect_to incident_path([:incident_id])
+    redirect_to incident_path(params[:incident_id])
   end
 
   private

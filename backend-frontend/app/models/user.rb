@@ -6,9 +6,9 @@ class User < ActiveRecord::Base
   has_many :problems,  dependent: :destroy
   has_many :incidents, dependent: :destroy
   has_many :requests,  dependent: :destroy
-  has_many :solutions_problems,  dependent: :delete_all
-  has_many :solutions_incidents, dependent: :delete_all
-  has_many :solutions_requests,  dependent: :delete_all
+  has_many :solutions_problem,  dependent: :delete_all
+  has_many :solutions_incident, dependent: :delete_all
+  has_many :solutions_request,  dependent: :delete_all
   has_many :comments_problems,   dependent: :delete_all
   has_many :comments_incidents,  dependent: :delete_all
   has_many :comments_requests,   dependent: :delete_all
@@ -21,15 +21,35 @@ class User < ActiveRecord::Base
   before_save :format_attributes
 
   def is_customer?
-    self.first_time == 'usuario' ? true : false
+    self.rank == 'usuario' ? true : false
   end
 
   def is_admin?
-    self.first_time == 'administrador' ? true : false
+    self.rank == 'administrador' ? true : false
   end
 
   def is_sa?
-    self.first_time == 'sa' ? true : false
+    self.rank == 'sa' ? true : false
+  end
+
+  def creator_cases?(id, type)
+    if (type == 'request')
+      self.requests.find(id) ? true : false
+    elsif (type == 'problem')
+      self.problems.find(id) ? true : false
+    else
+      self.incidents.find(id) ? true : false
+    end      
+  end
+
+  def creator_comments?(id, type)
+    if (type == 'request')
+      self.comments_requests.find(id) ? true : false
+    elsif (type == 'problem')
+      self.comments_problems.find(id) ? true : false
+    else
+      self.comments_incidents.find(id) ? true : false
+    end      
   end
 
   private
