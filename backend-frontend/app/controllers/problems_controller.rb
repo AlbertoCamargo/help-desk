@@ -7,6 +7,8 @@ class ProblemsController < ApplicationController
     if @problem
       @solutions_problems = @problem.solutions_problems 
       @solutions_problem = SolutionsProblem.new
+      @comments_problems = @problem.comments_problems
+      @comments_problem = CommentsProblem.new
     end
   end
 

@@ -7,6 +7,8 @@ class RequestsController < ApplicationController
     if @request
       @solutions_requests = @request.solutions_requests 
       @solutions_request = SolutionsRequest.new
+      @comments_requests = @request.comments_requests
+      @comments_request = CommentsRequest.new
     end
   end
 

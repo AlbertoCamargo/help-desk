@@ -8,7 +8,7 @@ class CommentsIncidentsController < ApplicationController
 
   def create
     incident_id = params[:comments_incident][:incident_id]
-    if Incident.find(incident_id).user = current_user || current_user.is_sa?
+    if Incident.find(incident_id).user == current_user || current_user.is_sa?
        @comments_incident = current_user.comments_incidents.build(params_comments_incident)
       if @comments_incident.save
         redirect_to incident_path(incident_id)

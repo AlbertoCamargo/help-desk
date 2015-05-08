@@ -50,8 +50,8 @@
 <%= form_for @comments_incident do |f| %>
   <label>Description</label><br>
   <%= f.text_area :description %><br>
-  <% unless @solutions_incident.errors[:description].blank? %>
-    <span><%= @solutions_incident.errors[:description].join(', ') %></span>
+  <% unless @comments_incident.errors[:description].blank? %>
+    <span><%= @comments_incident.errors[:description].join(', ') %></span>
   <% end %>
   <%= f.hidden_field :incident_id, value: @incident.id %>
   <%= f.submit 'Crear comentario a un incidente' %>

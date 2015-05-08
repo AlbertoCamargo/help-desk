@@ -18,11 +18,36 @@
   </tbody>
 </table>
 
+<table>
+  <tbody>
+    <% @comments_requests.each do |comments_request| %>
+      <tr>
+        <td><%= link_to comments_request.description %></td>
+        <td><%= comments_request.user.full_name %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Editar', edit_comments_request_path(comments_request) %></td>
+        <td><%= link_to 'Eliminar', comments_request_path(comments_request, request_id: @request.id), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= form_for @solutions_request do |f| %>
   <label>Description</label><br>
   <%= f.text_area :description %><br>
   <% unless @solutions_request.errors[:description].blank? %>
     <span><%= @solutions_request.errors[:description].join(', ') %></span>
+  <% end %>
+  <%= f.hidden_field :request_id, value: @request.id %>
+  <%= f.submit 'Crear solucion a una sugerencia' %>
+<% end %>
+
+<%= form_for @comments_request do |f| %>
+  <label>Description</label><br>
+  <%= f.text_area :description %><br>
+  <% unless @comments_request.errors[:description].blank? %>
+    <span><%= @comments_request.errors[:description].join(', ') %></span>
   <% end %>
   <%= f.hidden_field :request_id, value: @request.id %>
   <%= f.submit 'Crear solucion a una sugerencia' %>

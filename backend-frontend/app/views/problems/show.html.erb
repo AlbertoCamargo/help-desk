@@ -18,6 +18,21 @@
   </tbody>
 </table>
 
+<table>
+  <tbody>
+    <% @comments_problems.each do |comments_problem| %>
+      <tr>
+        <td><%= link_to comments_problem.description, comments_problem_path(comments_problem.id) %></td>
+        <td><%= comments_problem.user.full_name %></td>
+        <% unless current_user.is_customer? %>
+        <td><%= link_to 'Editar', edit_comments_problem_path(comments_problem) %></td>
+        <td><%= link_to 'Eliminar', comments_problem_path(comments_problem, problem_id: @problem.id), method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= form_for @solutions_problem do |f| %>
   <label>Description</label><br>
   <%= f.text_area :description %><br>
@@ -26,6 +41,16 @@
   <% end %>
   <%= f.hidden_field :problem_id, value: @problem.id %>
   <%= f.submit 'Crear solucion a problema' %>
+<% end %>
+
+<%= form_for @comments_problem do |f| %>
+  <label>Description</label><br>
+  <%= f.text_area :description %><br>
+  <% unless @comments_problem.errors[:description].blank? %>
+    <span><%= @comments_problem.errors[:description].join(', ') %></span>
+  <% end %>
+  <%= f.hidden_field :problem_id, value: @problem.id %>
+  <%= f.submit 'Crear comentario a problema' %>
 <% end %>
 
 <p><%= link_to 'back', :home %><p>
