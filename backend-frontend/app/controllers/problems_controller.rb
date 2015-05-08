@@ -1,11 +1,11 @@
 class ProblemsController < ApplicationController
-  
+  layout :false  
 	before_action :find_problem, only: [:update, :destroy]
 
   def show
     @problem = current_user.is_customer? ? current_user.problems.find(params[:id]) : Problem.find(params[:id])
     if @problem
-      @solutions_problems = @problem.solutions_problems 
+      @solutions_problems = @problem.solutions_problems
       @solutions_problem = SolutionsProblem.new
       @comments_problems = @problem.comments_problems
       @comments_problem = CommentsProblem.new
