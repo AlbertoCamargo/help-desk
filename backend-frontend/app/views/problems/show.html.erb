@@ -142,13 +142,12 @@
               </li>
               <% if current_user.creator_cases?(@problem.id, 'problem') %>
                 <div class="close-case">
-                  <!-- View for creator if a case NOT HAS BEEN SOLVE -->
-                  <% if @problem.state == 'answered' %>
-                    <a class ="solve" href="#"> -->
+                  <% if @problem.state == 'unanswered' %>
+                    <a class ="not-solve" href="#">
                       <i class="fa fa-ban fa-2x"></i>
                     </a>
                   <% else %>
-                    <a class ="not-solve" href="#">
+                    <a class ="solve" href="#">
                       <i class="fa fa-ban fa-2x"></i>
                     </a>
                     <span> Caso cerrado por <b> <%= @problem.user.full_name %> </b> el <b> <%= @problem.updated_at %> </b> </span>
