@@ -1,0 +1,3 @@
+$('#modal-8 #comments_problem_description').val("<%= @comments_problem.description %>")
+$('#new_comments_problem').attr('action', "<%= comments_problem_path(@comments_problem) %>");
+$('#new_comments_problem').attr('method', 'patch');

@@ -1,12 +1,10 @@
 class ProblemsController < ApplicationController
-  
-	before_action :find_problem, only: [:update, :destroy]
+  layout :false  
+	before_action :find_problem, only: [:update, :destroy, :finished, :open]
 
   def show
     @problem = current_user.is_customer? ? current_user.problems.find(params[:id]) : Problem.find(params[:id])
     if @problem
-      @solutions_problems = @problem.solutions_problems 
-      @solutions_problem = SolutionsProblem.new
       @comments_problems = @problem.comments_problems
       @comments_problem = CommentsProblem.new
     end
@@ -22,9 +20,7 @@ class ProblemsController < ApplicationController
   def create 
     respond_to do |format|
       @problem = current_user.problems.build(problem_params)
-      if @problem.save
-        @url = :home
-      end
+      @problem.save
       format.js
     end
   end
@@ -39,16 +35,24 @@ class ProblemsController < ApplicationController
   def update
     respond_to do |format|
   	  @problem.assign_attributes(problem_params)
-  	  if @problem.save
-  	  	@url = :home
-      end
+  	  @problem.save
       format.js
      end
   end
 
   def destroy
   	@problem.destroy
-  	redirect_to :home, notice: 'Se ha eliminado correctamente el problema'
+  	redirect_to :home
+  end
+
+  def finished
+    change_state(@problem, 'answered')
+    redirect_to problem_path(params[:id])
+  end
+
+  def open
+    change_state(@problem, 'active')
+    redirect_to problem_path(params[:id])
   end
 
   private
@@ -58,5 +62,10 @@ class ProblemsController < ApplicationController
 
   def find_problem
   	@problem = current_user.problems.find(params[:id])
+  end
+
+  def change_state(problem, state)
+    problem.assign_attributes(state: state)
+    problem.save
   end
 end

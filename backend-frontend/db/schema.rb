@@ -82,39 +82,6 @@ ActiveRecord::Schema.define(version: 10) do
 
   add_index "requests", ["user_id"], name: "index_requests_on_user_id"
 
-  create_table "solutions_incidents", force: :cascade do |t|
-    t.text     "description", null: false
-    t.integer  "user_id",     null: false
-    t.integer  "incident_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "solutions_incidents", ["incident_id"], name: "index_solutions_incidents_on_incident_id"
-  add_index "solutions_incidents", ["user_id"], name: "index_solutions_incidents_on_user_id"
-
-  create_table "solutions_problems", force: :cascade do |t|
-    t.text     "description", null: false
-    t.integer  "user_id",     null: false
-    t.integer  "problem_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "solutions_problems", ["problem_id"], name: "index_solutions_problems_on_problem_id"
-  add_index "solutions_problems", ["user_id"], name: "index_solutions_problems_on_user_id"
-
-  create_table "solutions_requests", force: :cascade do |t|
-    t.text     "description", null: false
-    t.integer  "user_id",     null: false
-    t.integer  "request_id",  null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "solutions_requests", ["request_id"], name: "index_solutions_requests_on_request_id"
-  add_index "solutions_requests", ["user_id"], name: "index_solutions_requests_on_user_id"
-
   create_table "users", force: :cascade do |t|
     t.integer  "customer_id",                     null: false
     t.string   "full_name",                       null: false

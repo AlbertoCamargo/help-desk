@@ -11,6 +11,7 @@ class CommentsRequestsController < ApplicationController
     if current_user.creator_cases?(request_id, 'request') || current_user.is_sa? || current_user.is_admin?
        @comments_request = current_user.comments_requests.build(params_comments_request)
       if @comments_request.save
+        change_state(@comments_request, 'active')
         redirect_to request_path(request_id)
       else
         render :new
@@ -49,6 +50,12 @@ class CommentsRequestsController < ApplicationController
 
   def params_comments_request
     params.require(:comments_request).permit(:description, :request_id)
+  end
+
+  def change_state(comments_request, state)
+    request = comments_request.request
+    request.assign_attributes(state: state)
+    request.save
   end
 end
 

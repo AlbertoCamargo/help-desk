@@ -10,7 +10,8 @@
 #error-title-request,
 #error-description-request,
 #error-title-problem,
-#error-description-problem
+#error-description-problem,
+#error-description
 {
   color: red;
 }

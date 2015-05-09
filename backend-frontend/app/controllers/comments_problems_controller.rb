@@ -1,39 +1,42 @@
 class CommentsProblemsController < ApplicationController
   
-  before_action :find_comments_problem, except: [:new, :create]
+  before_action :find_comments_problem, except: [:new, :create, :edit]
 
   def new
-    @comments_problem = CommentsProblem.new
+    respond_to do |format|
+      @comments_problem = CommentsProblem.new
+      format.js
+    end
   end
 
   def create
-    problem_id = params[:comments_problem][:problem_id]
-    if current_user.creator_cases?(problem_id, 'problem') || current_user.is_sa? || current_user.is_admin?
-       @comments_problem = current_user.comments_problems.build(params_comments_problem)
-      if @comments_problem.save
-        redirect_to problem_path(problem_id)
-      else
-        render :new
+    respond_to do |format|
+      problem_id = params[:comments_problem][:problem_id]
+      if current_user.creator_cases?(problem_id, 'problem') || current_user.is_sa? || current_user.is_admin?
+         @comments_problem = current_user.comments_problems.build(params_comments_problem)
+        if @comments_problem.save
+          change_state(@comments_problem, 'active')
+        end
       end
-    else
-      render :new
+      format.js
     end
   end
 
   def edit
+    respond_to do |format|
+      @comments_problem = CommentsProblem.find(params[:id])
+      format.js
+    end
   end
 
   def update
-    problem_id = params[:comments_problem][:problem_id]
-    if current_user.creator_cases?(problem_id, 'problem') || current_user.is_sa? || current_user.is_admin?
-      @comments_problem.assign_attributes(params_comments_problem)
-      if @comments_problem.save
-        redirect_to problem_path(problem_id)
-      else
-        render :edit
+    respond_to do |format|
+      problem_id = params[:comments_problem][:problem_id]
+      if current_user.creator_cases?(problem_id, 'problem') || current_user.is_sa? || current_user.is_admin?
+        @comments_problem.assign_attributes(params_comments_problem)
+        @comments_problem.save
       end
-    else
-      render :edit
+      format.js
     end
   end
 
@@ -49,5 +52,11 @@ class CommentsProblemsController < ApplicationController
 
   def params_comments_problem
     params.require(:comments_problem).permit(:description, :problem_id)
+  end
+
+  def change_state(comments_problem, state)
+    problem = comments_problem.problem
+    problem.assign_attributes(state: state)
+    problem.save
   end
 end

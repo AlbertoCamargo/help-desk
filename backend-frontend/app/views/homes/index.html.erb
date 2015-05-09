@@ -41,10 +41,10 @@
                 <span id="error-description-incident"></span>
               </div>
               <div>
-              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
-              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
-            </form>                      
-            </div>
+                <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+                <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+              </div>
+            </form>                             
           <% end %> 
         </div>
       </div>
@@ -149,7 +149,7 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to request.title, request_path(request) %></span>
                             <div class="pull-right hidden-phone">
-                              <a href="/requests/<%= request.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-pencil"></i></button></a>
+                              <a href="/requests/<%= request.id %>/edit" data-remote="true" ><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-pencil"></i></button></a>
                               <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                             </div>
                           </div>

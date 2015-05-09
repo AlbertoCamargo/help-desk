@@ -58,6 +58,13 @@ function clear_span(){
   $('.form-panel span').text('')
   $('.form-panel #request_title').val('')
   $('.form-panel #request_description').val('')
+  $('.form-panel #problem_title').val('')
+  $('.form-panel #problem_description').val('')
+  $('.form-panel #incident_title').val('')
+  $('.form-panel #incident_description').val('')
+  $('.form-panel #comments_problem_description').val('')
+  $('.form-panel #comments_request_description').val('')
+  $('.form-panel #comments_incident_description').val('')
 }
 
 

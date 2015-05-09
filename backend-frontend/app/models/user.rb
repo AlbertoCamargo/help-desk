@@ -6,9 +6,6 @@ class User < ActiveRecord::Base
   has_many :problems,  dependent: :destroy
   has_many :incidents, dependent: :destroy
   has_many :requests,  dependent: :destroy
-  has_many :solutions_problem,  dependent: :delete_all
-  has_many :solutions_incident, dependent: :delete_all
-  has_many :solutions_request,  dependent: :delete_all
   has_many :comments_problems,   dependent: :delete_all
   has_many :comments_incidents,  dependent: :delete_all
   has_many :comments_requests,   dependent: :delete_all
@@ -34,21 +31,21 @@ class User < ActiveRecord::Base
 
   def creator_cases?(id, type)
     if (type == 'request')
-      self.requests.find(id) ? true : false
+      self.requests.where(id: id) ? true : false
     elsif (type == 'problem')
-      self.problems.find(id) ? true : false
+      self.problems.where(id: id) ? true : false
     else
-      self.incidents.find(id) ? true : false
+      self.incidents..where(id: id) ? true : false
     end      
   end
 
   def creator_comments?(id, type)
     if (type == 'request')
-      self.comments_requests.find(id) ? true : false
+      self.comments_requests.where(id: id) ? true : false
     elsif (type == 'problem')
-      self.comments_problems.find(id) ? true : false
+      self.comments_problems.where(id: id) ? true : false
     else
-      self.comments_incidents.find(id) ? true : false
+      self.comments_incidents..where(id: id) ? true : false
     end      
   end
 

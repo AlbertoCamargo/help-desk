@@ -19,4 +19,10 @@ Rails.application.routes.draw do
   get 'home' => 'homes#index',           as: :home
   get 'login' => 'sessions#new',         as: :login
   delete 'logout' => 'sessions#destroy', as: :logout 
+  post 'finished/:id' => 'problems#finished'
+  post 'open/:id' => 'problems#open'
+  post 'finished/:id' => 'requests#finished'
+  post 'open/:id' => 'requests#open'
+  post 'finished/:id' => 'incidents#finished'
+  post 'open/:id' => 'incidents#open'
 end

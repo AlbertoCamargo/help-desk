@@ -11,6 +11,7 @@ class CommentsIncidentsController < ApplicationController
     if current_user.creator_cases?(incident_id, 'incident') || current_user.is_sa? || current_user.is_admin?
        @comments_incident = current_user.comments_incidents.build(params_comments_incident)
       if @comments_incident.save
+        change_state(@comments_incident, 'active')
         redirect_to incident_path(incident_id)
       else
         render :new
@@ -49,5 +50,11 @@ class CommentsIncidentsController < ApplicationController
 
   def params_comments_incident
     params.require(:comments_incident).permit(:description, :incident_id)
+  end
+
+  def change_state(comments_incident, state)
+    incident = comments_incident.incident
+    incident.assign_attributes(state: state)
+    incident.save
   end
 end
