@@ -8,7 +8,7 @@
 <table>
   <tbody>
     <% @comments_incidents.each do |comments_incident| %>
-      <% if current_user.creator_comments?(comments_incident.id, 'incident') %>
+      <% if current_user.creator_comments?(comments_incident.id, 'incident') ) %>
         <!--  AUTHOR -->
         <tr>
           <td><%= link_to comments_incident.description %></td>
