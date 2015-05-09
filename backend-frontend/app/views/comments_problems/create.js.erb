@@ -1,5 +1,5 @@
 if (<%= !@comments_problem.errors.empty? %>) {
   $('#error-description').html(function() { return  "<%= @comments_problem.errors[:description].join(', ') %>" })
 }else{
-  window.location.href = url
+  location.reload()
 }
