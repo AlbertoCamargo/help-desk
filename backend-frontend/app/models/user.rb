@@ -31,11 +31,11 @@ class User < ActiveRecord::Base
 
   def creator_cases?(id, type)
     if (type == 'request')
-      self.requests.where(id: id) ? true : false
+      self.requests.where(id: id).first ? true : false
     elsif (type == 'problem')
-      self.problems.where(id: id) ? true : false
+      self.problems.where(id: id).first ? true : false
     else
-      self.incidents..where(id: id) ? true : false
+      self.incidents..where(id: id).first ? true : false
     end      
   end
 

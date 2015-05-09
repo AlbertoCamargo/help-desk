@@ -20,7 +20,7 @@ i.fa.fa-reply.fa-2x {
 }
 
 
- * {
+* {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
@@ -288,14 +288,14 @@ div.comment-main-level {
 /*
 ===================================================
 */
-.close-case{
-   position: absolute;
+.close-case {
+  position: absolute;
   width: 70%;
   left: 17px;
   top: 97.5%;
 }
 
-.close-case a{
+.close-case a {
   background: rgb(222, 225, 227);
   position: relative;
   width: 30px;
@@ -310,13 +310,14 @@ div.comment-main-level {
   overflow: hidden;
 }
 
-.close-case .solve{
+.close-case .solve {
   color: rgba(255, 11, 11, 1);
 }
 
 .close-case .not-solve{
   color: rgba(14, 14, 14, 1);
 }
+
 .close-case span {
   position: relative;
   padding-left: 7px;
