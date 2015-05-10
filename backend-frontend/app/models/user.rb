@@ -35,17 +35,17 @@ class User < ActiveRecord::Base
     elsif (type == 'problem')
       self.problems.where(id: id).first ? true : false
     else
-      self.incidents..where(id: id).first ? true : false
+      self.incidents.where(id: id).first ? true : false
     end      
   end
 
   def creator_comments?(id, type)
     if (type == 'request')
-      self.comments_requests.where(id: id) ? true : false
+      self.comments_requests.where(id: id).first ? true : false
     elsif (type == 'problem')
-      self.comments_problems.where(id: id) ? true : false
+      self.comments_problems.where(id: id).first ? true : false
     else
-      self.comments_incidents..where(id: id) ? true : false
+      self.comments_incidents..where(id: id).first ? true : false
     end      
   end
 

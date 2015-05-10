@@ -13,7 +13,7 @@ class CommentsIncidentsController < ApplicationController
     respond_to do |format|
       incident_id = params[:comments_incident][:incident_id]
       if current_user.creator_cases?(incident_id, 'incident') || current_user.is_sa? || current_user.is_admin?
-         @comments_incident = current_user.comments_incidents.build(params_comments_incident)
+        @comments_incident = current_user.comments_incidents.build(params_comments_incident)
         if @comments_incident.save
           change_state(@comments_incident, 'active')
         end
@@ -37,6 +37,7 @@ class CommentsIncidentsController < ApplicationController
         @comments_incident.save
       end
       format.js
+    end
   end
 
   def destroy

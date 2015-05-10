@@ -93,7 +93,7 @@
                     <a href=<%= problem_path(@problem) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
                      <a href="/problems/<%= @problem.id %>/edit" class="md-trigger" data-modal="modal-9" data-remote="true"><i class="fa fa-pencil"></i></a>
                   <% end %>
-                  <% if @comments_problems.size == 0 %>
+                  <% if @comments_problems.empty? %>
                     <a href='/comments_problems/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
                   <% end %>
                 </div>
@@ -134,6 +134,9 @@
                           <span><%= comments_problem.updated_at %></span>
                           <i class="fa fa-pencil"></i>
                           <i class="fa fa-trash-o "></i>
+                          <% if @comments_problems.size == i + 1 %>
+                            <a href='/comments_problems/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                          <% end %>
                         </div>
                         <div class="comment-content">
                           <%= comments_problem.description %>

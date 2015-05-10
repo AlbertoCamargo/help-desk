@@ -1,4 +1,5 @@
 class ProblemsController < ApplicationController
+  
   before_action :find_problem, only: [:update, :destroy, :finished, :open]
 
   def show
@@ -36,7 +37,7 @@ class ProblemsController < ApplicationController
   	  @problem.assign_attributes(problem_params)
   	  @problem.save
       format.js
-     end
+    end
   end
 
   def destroy
