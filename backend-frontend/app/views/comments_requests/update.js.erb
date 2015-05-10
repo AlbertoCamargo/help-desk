@@ -1,0 +1,5 @@
+if (<%= !@comments_request.errors.empty? %>) {
+  $('#error-description').html(function() { return  "<%= @comments_request.errors[:description].join(', ') %>" })
+}else{
+  location.reload()
+}

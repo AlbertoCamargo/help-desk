@@ -1,40 +1,42 @@
 class CommentsRequestsController < ApplicationController
   
-  before_action :find_comments_request, except: [:new, :create]
+  before_action :find_comments_request, except: [:new, :create, :edit]
 
   def new
-    @comments_request = CommentsRequest.new
+    respond_to do |format|
+      @comments_request = CommentsRequest.new
+      format.js
+    end
   end
 
   def create
-    request_id = params[:comments_request][:request_id]
-    if current_user.creator_cases?(request_id, 'request') || current_user.is_sa? || current_user.is_admin?
-       @comments_request = current_user.comments_requests.build(params_comments_request)
-      if @comments_request.save
-        change_state(@comments_request, 'active')
-        redirect_to request_path(request_id)
-      else
-        render :new
+    respond_to do |format|
+      request_id = params[:comments_request][:request_id]
+      if current_user.creator_cases?(request_id, 'request') || current_user.is_sa? || current_user.is_admin?
+         @comments_request = current_user.comments_requests.build(params_comments_request)
+        if @comments_request.save
+          change_state(@comments_request, 'active')
+        end
       end
-    else
-      render :new
+      format.js
     end
   end
 
   def edit
+    respond_to do |format|
+      @comments_request = CommentsRequest.find(params[:id])
+      format.js
+    end
   end
 
   def update
-    request_id = params[:comments_request][:request_id]
-    if current_user.creator_cases?(request_id, 'request') || current_user.is_sa? || current_user.is_admin?
-      @comments_request.assign_attributes(params_comments_request)
-      if @comments_request.save
-        redirect_to request_path(request_id)
-      else
-        render :edit
+    respond_to do |format|
+      request_id = params[:comments_request][:request_id]
+      if current_user.creator_cases?(request_id, 'request') || current_user.is_sa? || current_user.is_admin?
+        @comments_request.assign_attributes(params_comments_request)
+        @comments_request.save
       end
-    else
-      render :edit
+      format.js
     end
   end
 
