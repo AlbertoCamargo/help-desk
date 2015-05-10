@@ -1,6 +1,5 @@
 class ProblemsController < ApplicationController
-  layout :false  
-	before_action :find_problem, only: [:update, :destroy, :finished, :open]
+  before_action :find_problem, only: [:update, :destroy, :finished, :open]
 
   def show
     @problem = current_user.is_customer? ? current_user.problems.find(params[:id]) : Problem.find(params[:id])
