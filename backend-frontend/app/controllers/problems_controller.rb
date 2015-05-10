@@ -1,5 +1,6 @@
 class ProblemsController < ApplicationController
   
+  layout false
   before_action :find_problem, only: [:update, :destroy, :finished, :open]
 
   def show

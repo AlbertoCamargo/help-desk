@@ -1,156 +1,141 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>HelpDesk</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-  <![endif]-->
-  <%= stylesheet_link_tag 'discussion_site_manifest' %>
-</head>
-<body>
-  <!-- Modal -->
-  <div class="md-modal md-effect-8" id="modal-8">
-    <div class="md-content">
-      <div class="form-panel">
-        <h3 class="mb">Responder</h3>
-        <%= form_for(@comments_incident, remote: true) do |f| %>
-          <form class="form-horizontal tasi-form" method="get">
-            <div class="form-group has-success">
-              <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
-              <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
-              <span id="error-description"></span>
-            </div>
-            <%= f.hidden_field :incident_id, value: @incident.id %>
-            <div >
-              <button type="submit"  name="commit"><i class="fa fa-check"></i> Enviar </button>
-              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i> Cancelar</button> 
-            </div>     
-          </form>
-        <% end %>       
-      </div>
-    </div>
-    </div>
-    <div class="md-modal md-effect-8" id="modal-9">
-      <div class="md-content">
-        <div class="form-panel">
-          <h3 class="mb">Incidente</h3>
-          <%= form_for(@incident, remote: true) do |f| %>
-            <form class="form-horizontal tasi-form" method="get">
-              <div class="form-group has-success">
-                <label class="col-sm-2 control-label col-lg-2">Titulo</label>
-                <%= f.text_field(:title, class: 'form-control') %>
-                <span id="error-title-incident"></span>
-              </div>
-              <div class="form-group has-success">
-                <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
-                <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
-                <span id="error-description-incident"></span>
-              </div>
-              <div>
-              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
-              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
-            </form>                      
-            </div>
-          <% end %> 
-        </div>
-      </div>
-  </div>
-  <!-- End modal -->
-  <section id="container" class="sidebar-closed container" >
-     <header class="header black-bg">
-      <a href="index.html" class="logo"><b>HELP DESK</b></a>
-      <div class="nav notify-row" id="top_menu">
-      <ul class="nav top-menu">
-        <li>
-          <a href="#">
-            <i class="fa fa-home"> </i>
-          </a>
-        </li>
-        <!-- settings start -->
-        <li>
-          <a href="#">
-            <i class="fa fa-user"> </i>
-          </a>
-        </li>
-        <!-- settings end -->
-        <!-- inbox dropdown start-->
-        <li id="header_inbox_bar" class="dropdown">
-            <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
-              <i class="fa fa-envelope-o"></i>
-           </a>
-        </li>
-              <!-- inbox dropdown end -->
-          </ul>
-          <!--  notification end -->
-      </div>
-      <div class="top-menu">
-        <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="#"><i class="fa fa-sign-out fa-1x"></i></a></li>
-        </ul>
-      </div>
-    </header>
-      <div id="main-content" class="wrapper">
-        <div class="comments-container">
-          <ul id="comments-list" class="comments-list">
-            <li>
-              <div class="comment-main-level">
-                <div class="comment-avatar"><i class="fa fa-question fa-4x"></i></div>
-                <div class="comment-box">
-                  <div class="comment-head">
-                    <h6 class="comment-name by-author"><a href="#"><%= @incident.title %></a></h6>
-                    <span> <%= @incident.created_at %> </span>
-                    <%  if current_user.creator_cases?(@incident.id, 'incident') %> 
-                      <a href=<%= incident_path(@incident) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
-                       <a href="/incidents/<%= @incident.id %>/edit" class="md-trigger" data-modal="modal-9" data-remote="true"><i class="fa fa-pencil"></i></a>
-                    <% end %>
-                    <% if @comments_incidents.empty? %>
-                      <a href='/comments_incidents/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
-                    <% end %>
-                  </div>
-                  <div class="comment-content">
-                    <%= @incident.description %>
-                  </div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>HELP DESK</title>
+    <!-- Bootstrap core CSS -->
+    <%= stylesheet_link_tag 'discussion_site_manifest' %>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+    <body>
+      <!-- Modal -->
+      <div class="md-modal md-effect-8" id="modal-8">
+        <div class="md-content">
+          <div class="form-panel">
+            <h3 class="mb">Responder</h3>
+            <%= form_for(@comments_incident, remote: true) do |f| %>
+              <form class="form-horizontal tasi-form" method="get">
+                <div class="form-group has-success">
+                  <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
+                  <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
+                  <span id="error-description"></span>
                 </div>
-              </div>
-              <% @comments_incidents.each_with_index do |comments_incident, i| %>
-                <% if comments_incident.user.is_customer? %>
+                <%= f.hidden_field :incident_id, value: @incident.id %>
+                <div >
+                  <button type="submit"  name="commit"><i class="fa fa-check"></i> Enviar </button>
+                  <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i> Cancelar</button> 
+                </div>     
+              </form>
+            <% end %>       
+          </div>
+        </div>
+        </div>
+        <div class="md-modal md-effect-8" id="modal-9">
+          <div class="md-content">
+            <div class="form-panel">
+              <h3 class="mb">Incidente</h3>
+              <%= form_for(@incident, remote: true) do |f| %>
+                <form class="form-horizontal tasi-form" method="get">
+                  <div class="form-group has-success">
+                    <label class="col-sm-2 control-label col-lg-2">Titulo</label>
+                    <%= f.text_field(:title, class: 'form-control') %>
+                    <span id="error-title-incident"></span>
+                  </div>
+                  <div class="form-group has-success">
+                    <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
+                    <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
+                    <span id="error-description-incident"></span>
+                  </div>
+                  <div>
+                  <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+                  <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+                </form>                      
+                </div>
+              <% end %> 
+            </div>
+          </div>
+      </div>
+      <!-- End modal -->
+      <section id="container" class="sidebar-closed container" >
+         <header class="header black-bg">
+          <a href="index.html" class="logo"><b>HELP DESK</b></a>
+          <div class="nav notify-row" id="top_menu">
+          <ul class="nav top-menu">
+            <li>
+              <a href="#">
+                <i class="fa fa-home"> </i>
+              </a>
+            </li>
+            <!-- settings start -->
+            <li>
+              <a href="#">
+                <i class="fa fa-user"> </i>
+              </a>
+            </li>
+            <!-- settings end -->
+            <!-- inbox dropdown start-->
+            <li id="header_inbox_bar" class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                  <i class="fa fa-envelope-o"></i>
+               </a>
+            </li>
+                  <!-- inbox dropdown end -->
+              </ul>
+              <!--  notification end -->
+          </div>
+          <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+              <li><a class="logout" href="#"><i class="fa fa-sign-out fa-1x"></i></a></li>
+            </ul>
+          </div>
+        </header>
+          <div id="main-content" class="wrapper">
+            <div class="comments-container">
+              <ul id="comments-list" class="comments-list">
+                <li>
                   <div class="comment-main-level">
                     <div class="comment-avatar"><i class="fa fa-question fa-4x"></i></div>
                     <div class="comment-box">
                       <div class="comment-head">
-                        <h6 class="comment-name by-author"><a href="#"><%= comments_incident.user.full_name %></a></h6>
-                        <span> <%= comments_incident.updated_at %> </span>
-                        <% if current_user.creator_comments?(comments_incident.id, 'incident')%>
-                          <a href=<%= comments_incident_path(comments_incident, incident_id: @incident.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
-                          <a href="/comments_incidents/<%= comments_incident.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
+                        <h6 class="comment-name by-author"><a href="#"><%= @incident.title %></a></h6>
+                        <span> <%= @incident.created_at %> </span>
+                        <%  if current_user.creator_cases?(@incident.id, 'incident') %> 
+                          <a href=<%= incident_path(@incident) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
+                           <a href="/incidents/<%= @incident.id %>/edit" class="md-trigger" data-modal="modal-9" data-remote="true"><i class="fa fa-pencil"></i></a>
                         <% end %>
-                        <% if @comments_incidents.size == i + 1 %>
+                        <% if @comments_incidents.empty? %>
                           <a href='/comments_incidents/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
                         <% end %>
                       </div>
                       <div class="comment-content">
-                        <%= comments_incident.description %>
+                        <%= @incident.description %>
                       </div>
                     </div>
                   </div>
-                <% else %>
-                  <ul class="comments-list reply-list">
-                    <li>
+                  <% @comments_incidents.each_with_index do |comments_incident, i| %>
+                    <% if comments_incident.user.is_customer? %>
                       <div class="comment-main-level">
-                      <div class="comment-avatar"><i class="fa fa-check fa-3x"></i></div>
+                        <div class="comment-avatar"><i class="fa fa-question fa-4x"></i></div>
                         <div class="comment-box">
                           <div class="comment-head">
-                            <h6 class="comment-name"><a href="#"><%= comments_incident.user.full_name %></a></h6>
-                            <span><%= comments_incident.updated_at %></span>
-                            <i class="fa fa-pencil"></i>
-                            <i class="fa fa-trash-o "></i>
+                            <h6 class="comment-name by-author"><a href="#"><%= comments_incident.user.full_name %></a></h6>
+                            <span> <%= comments_incident.updated_at %> </span>
+                            <% if current_user.creator_comments?(comments_incident.id, 'incident')%>
+                              <a href=<%= comments_incident_path(comments_incident, incident_id: @incident.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
+                              <a href="/comments_incidents/<%= comments_incident.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
+                            <% end %>
                             <% if @comments_incidents.size == i + 1 %>
-                              <a href='/comments_incident/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                              <a href='/comments_incidents/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
                             <% end %>
                           </div>
                           <div class="comment-content">
@@ -158,30 +143,50 @@
                           </div>
                         </div>
                       </div>
-                    </li>
-                  </ul>
+                    <% else %>
+                      <ul class="comments-list reply-list">
+                        <li>
+                          <div class="comment-main-level">
+                          <div class="comment-avatar"><i class="fa fa-check fa-3x"></i></div>
+                            <div class="comment-box">
+                              <div class="comment-head">
+                                <h6 class="comment-name"><a href="#"><%= comments_incident.user.full_name %></a></h6>
+                                <span><%= comments_incident.updated_at %></span>
+                                <i class="fa fa-pencil"></i>
+                                <i class="fa fa-trash-o "></i>
+                                <% if @comments_incidents.size == i + 1 %>
+                                  <a href='/comments_incident/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                                <% end %>
+                              </div>
+                              <div class="comment-content">
+                                <%= comments_incident.description %>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    <% end %>
+                  <% end %>
+                </li>
+                <% if current_user.creator_cases?(@incident.id, 'incident') %>
+                  <div class="close-case">
+                    <% if @incident.state != 'answered' %>
+                      <a class ="not-solve" href="/finished/<%= @incident.id %>" data-method="post">
+                        <i class="fa fa-ban fa-2x"></i>
+                      </a>
+                    <% else %>
+                      <a class ="solve" href="/open/<%= @incident.id %>" data-method="post">
+                        <i class="fa fa-ban fa-2x"></i>
+                      </a>
+                      <span> Caso cerrado por <b> <%= @incident.user.full_name %> </b> el <b> <%= @incident.updated_at %> </b> </span>
+                    <% end %>
+                  </div>
                 <% end %>
-              <% end %>
-            </li>
-            <% if current_user.creator_cases?(@incident.id, 'incident') %>
-              <div class="close-case">
-                <% if @incident.state != 'answered' %>
-                  <a class ="not-solve" href="/finished/<%= @incident.id %>" data-method="post">
-                    <i class="fa fa-ban fa-2x"></i>
-                  </a>
-                <% else %>
-                  <a class ="solve" href="/open/<%= @incident.id %>" data-method="post">
-                    <i class="fa fa-ban fa-2x"></i>
-                  </a>
-                  <span> Caso cerrado por <b> <%= @incident.user.full_name %> </b> el <b> <%= @incident.updated_at %> </b> </span>
-                <% end %>
-              </div>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-  </section>
+              </ul>
+            </div>
+          </div>
+      </section>
 
-  <%= javascript_include_tag 'home' %>
-
-</body>
+    <%= javascript_include_tag 'home' %>
+  </body>
+</html>

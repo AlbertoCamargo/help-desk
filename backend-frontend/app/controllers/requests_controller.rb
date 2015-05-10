@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   
+  layout false
   before_action :find_request, only: [:update, :destroy]
 
   def show

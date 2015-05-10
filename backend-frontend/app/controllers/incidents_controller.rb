@@ -1,5 +1,6 @@
 class IncidentsController < ApplicationController
   
+  layout false
   before_action :find_incident, only: [:update, :destroy]
 
   def show
