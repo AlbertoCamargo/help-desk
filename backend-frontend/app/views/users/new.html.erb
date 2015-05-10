@@ -1,37 +1,43 @@
-<h1>Sign Up</h1>
-<%= form_for @user do |f| %>
-<%= f.text_field :full_name, placeholder: 'Full name' %>
-  <% unless @user.errors[:full_name].blank? %>
-    <span><%= @user.errors[:full_name].join(', ') %></span>
-  <% end %><br><br>
-  <%= f.text_field :customer_id, placeholder: 'Customer_id' %>
-  <% unless @user.errors[:customer_id].blank? %>
-    <span><%= @user.errors[:customer_id].join(', ') %></span>
-  <% end %><br><br>
-  <%= f.text_field :phone, placeholder: 'Phone' %>
-  <% unless @user.errors[:phone].blank? %>
-    <span><%= @user.errors[:phone].join(', ') %></span>
-  <% end %><br><br>
-  <%= f.text_field :email, placeholder: 'Email' %>
-  <% unless @user.errors[:email].blank? %>
-    <span><%= @user.errors[:email].join(', ') %></span>
-  <% end %>
-  <br><br>
-  <%= f.select :rank, [['sa'], ['administrador'], ['usuario']] %>
-  <% unless @user.errors[:rank].blnk? %>
-    <span><%= @user.errors[:rank].join(', ') %></span>
-  <% end %>
-  <br><br>
-  <%= f.password_field :password, placeholder: 'Password' %>
-  <% unless @user.errors[:password].blank? %>
-    <span><%= @user.errors[:password].join(', ') %></span>
-  <% end %>
-  <br><br>
-  <%= f.password_field :password_confirmation, placeholder: 'password confirmation' %>
-  <% unless @user.errors[:password_confirmation].blank? %>
-    <span><%= @user.errors[:password_confirmation].join(', ') %></span>
-  <% end %>
-  <br><br>
-  <%= f.submit 'Sign Up' %>
-<% end %>
+<div class="container">
+  <form role="form">
+    <%= form_for @user do |f| %>
+      <%= f.text_field :full_name, placeholder: 'Full name' %>
+        <div class="form-group">
+          <% unless @user.errors[:full_name].blank? %>
+            <span><%= @user.errors[:full_name].join(', ') %></span>
+          <% end %><br><br>
+        </div>
+          <%= f.text_field :customer_id, placeholder: 'Customer_id' %>
+          <% unless @user.errors[:customer_id].blank? %>
+            <span><%= @user.errors[:customer_id].join(', ') %></span>
+          <% end %><br><br>
+          <%= f.text_field :phone, placeholder: 'Phone' %>
+          <% unless @user.errors[:phone].blank? %>
+            <span><%= @user.errors[:phone].join(', ') %></span>
+          <% end %><br><br>
+          <%= f.text_field :email, placeholder: 'Email' %>
+          <% unless @user.errors[:email].blank? %>
+            <span><%= @user.errors[:email].join(', ') %></span>
+          <% end %>
+          <br><br>
+          <%= f.select :rank, [['sa'], ['administrador'], ['usuario']] %>
+          <% unless @user.errors[:rank].blank? %>
+            <span><%= @user.errors[:rank].join(', ') %></span>
+          <% end %>
+          <br><br>
+          <%= f.password_field :password, placeholder: 'Password' %>
+          <% unless @user.errors[:password].blank? %>
+            <span><%= @user.errors[:password].join(', ') %></span>
+          <% end %>
+          <br><br>
+          <%= f.password_field :password_confirmation, placeholder: 'password confirmation' %>
+          <% unless @user.errors[:password_confirmation].blank? %>
+            <span><%= @user.errors[:password_confirmation].join(', ') %></span>
+          <% end %>
+          <br><br>
+          <%= f.submit 'Sign Up' %>
+        </div>
+    <% end %>
+  </form>>
+</div>
 
