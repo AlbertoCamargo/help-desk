@@ -1,0 +1,3 @@
+$('#modal-8 #comments_request_description').val("<%= @comments_request.description %>")
+$('#new_comments_request').attr('action', "<%= comments_request_path(@comments_request) %>");
+$('#new_comments_request').attr('method', 'patch');

@@ -1,0 +1,3 @@
+$('#modal-8 #comments_incident_description').val("<%= @comments_incident.description %>")
+$('#new_comments_incident').attr('action', "<%= comments_incident_path(@comments_incident) %>");
+$('#new_comments_incident').attr('method', 'patch');

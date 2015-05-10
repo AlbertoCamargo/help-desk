@@ -17,9 +17,9 @@
     <span><%= @user.errors[:email].join(', ') %></span>
   <% end %>
   <br><br>
-  <%= f.select :state, [['super usuario'], ['administrador'], ['usuario']] %>
-  <% unless @user.errors[:stsate].blnk? %>
-    <span><%= @user.errors[:state].join(', ') %></span>
+  <%= f.select :rank, [['sa'], ['administrador'], ['usuario']] %>
+  <% unless @user.errors[:rank].blnk? %>
+    <span><%= @user.errors[:rank].join(', ') %></span>
   <% end %>
   <br><br>
   <%= f.password_field :password, placeholder: 'Password' %>
