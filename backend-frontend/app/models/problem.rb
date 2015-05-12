@@ -11,4 +11,8 @@ class Problem < ActiveRecord::Base
   def is_finished?
     self.state == 'answered' ? true : false
   end
+
+  def has_one_comment?
+    self.comments_problems.count == 1 ? true : false
+  end
 end
