@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
     elsif (type == 'problem')
       self.comments_problems.where(id: id).first ? true : false
     else
-      self.comments_incidents..where(id: id).first ? true : false
+      self.comments_incidents.where(id: id).first ? true : false
     end      
   end
 
