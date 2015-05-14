@@ -1,0 +1,6 @@
+if (<%= !@problem.errors.empty? %>) {
+  $('#error-title-problem').html(function() { return  "<%= @problem.errors[:title].join(', ') %>" })
+  $('#error-description-problem').html(function() { return  "<%= @problem.errors[:description].join(', ') %>" })
+}else{
+  location.reload() 
+}

@@ -1,0 +1,32 @@
+source 'https://rubygems.org'
+ruby '2.2.0'
+
+gem 'rails', '4.2.0'
+
+group :production do
+  #gem 'pg'
+  gem 'puma'
+  gem 'rails_12factor'
+end
+
+group :development do
+  gem 'byebug'
+  gem 'faker'
+  gem 'quiet_assets'
+  gem 'spring'
+  gem 'sqlite3'
+  gem 'thin'
+  gem 'web-console', '~> 2.0'
+end
+
+# Assets
+gem 'coffee-rails'
+gem 'sass-rails'
+gem 'turbolinks', '~> 2.5.3'
+gem 'uglifier'
+gem 'jquery-rails'
+gem 'font-awesome-rails'
+
+# General Use
+gem 'sorcery'
+gem 'therubyracer', platforms: :ruby

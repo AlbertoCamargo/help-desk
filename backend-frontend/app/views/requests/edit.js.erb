@@ -1,0 +1,4 @@
+$('#modal-9 #request_title').val("<%= @request.title %>")
+$('#modal-9 #request_description').val("<%= @request.description %>")
+$('#new_request').attr('action', "<%= request_path(@request) %>");
+$('#new_request').attr('method', 'patch');

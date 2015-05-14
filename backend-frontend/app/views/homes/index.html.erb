@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<!--<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+</br>-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <title>HELP DESK</title>
+    <!-- Bootstrap core CSS -->
+    <%= stylesheet_link_tag 'home' %>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  <body>
+    <!-- Modal -->
+    <div class="md-modal md-effect-8" id="modal-8">
+      <div class="md-content">
+        <div class="form-panel">
+          <h3 class="mb">Incidentes</h3>
+          <%= form_for(@incident, remote: true) do |f| %>
+            <form class="form-horizontal tasi-form" method="get">
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2">Titulo</label>
+                <%= f.text_field(:title, class: 'form-control') %>
+                <span id="error-title-incident"></span>
+              </div>
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
+                <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
+                <span id="error-description-incident"></span>
+              </div>
+              <div>
+                <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+                <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+              </div>
+            </form>                             
+          <% end %> 
+        </div>
+      </div>
+    </div>
+    <div class="md-modal md-effect-8" id="modal-9">
+      <div class="md-content">
+        <div class="form-panel">
+          <h3 class="mb">Sugerencias</h3>
+          <%= form_for(@request, remote: true) do |f| %>
+            <form class="form-horizontal tasi-form" method="get">
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2">Titulo</label>
+                <%= f.text_field(:title, class: 'form-control') %>
+                <span id="error-title-request"></span>
+              </div>
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
+                <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
+                <span id="error-description-request"></span>
+              </div>
+              <div>
+              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+            </form>                      
+            </div>
+          <% end %> 
+        </div>
+      </div>
+    </div>
+    <div class="md-modal md-effect-8" id="modal-10">
+      <div class="md-content">
+        <div class="form-panel">
+          <h3 class="mb">Problemas</h3>
+          <%= form_for(@problem, remote: true) do |f| %>
+            <form class="form-horizontal tasi-form" method="get">
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2">Titulo</label>
+                <%= f.text_field(:title, class: 'form-control') %>
+                <span id="error-title-problem"></span>
+              </div>
+              <div class="form-group has-success">
+                <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
+                <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
+                <span id="error-description-problem"></span>
+              </div>
+              <div>
+              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
+              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+            </form>                      
+            </div>
+          <% end %> 
+        </div>
+      </div>
+    </div>
+    <!-- End modal -->
+    <section id="container" class="sidebar-closed container" >
+     <!-- Header -->
+      <%= render 'shared/header'%>
+     <!-- End header -->
+      <div id="main-content" class="wrapper">
+        <div class="tables">
+          <section class="task-panel tasks-widget">
+            <div class="panel-heading">
+                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Sugerencias</h5></div><br>
+                <div class="pull-right hidden-phone"> 
+                  <a href='/requests/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-plus"></i></button></a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="task-content">
+                  <ul class="task-list">
+                  <% @requests.each do |request| %>
+                      <li class=<%= request.state %>>
+                          <div class="task-title">
+                            <span class="task-title-sp"><%= link_to request.title, request_path(request) %></span>
+                            <div class="pull-right hidden-phone">
+                              <% if current_user.creator_cases?(request.id, 'request') %>
+                                <a href="/requests/<%= request.id %>/edit" data-remote="true" ><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-pencil"></i></button></a>
+                                <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                              <% end %>
+                            </div>
+                          </div>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </section>
+            <section class="task-panel tasks-widget">
+              <div class="panel-heading">
+                  <div class="pull-left"><h5><i class="fa fa-tasks"></i>Incidentes</h5> </div><br>
+                  <div class="pull-right hidden-phone"> 
+                    <a href='/incidents/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"> <i class="fa fa-plus"></i></button></a>
+                  </div>
+              </div>
+              <div class="panel-body">
+                <div class="task-content">
+                  <ul class="task-list">
+                  <% @incidents.each do |incident| %>
+                      <li class=<%= incident.state %>>
+                          <div class="task-title">
+                            <span class="task-title-sp"><%= link_to incident.title, incident_path(incident) %></span>
+                            <div class="pull-right hidden-phone">
+                              <% if current_user.creator_cases?(incident.id, 'incident') %>
+                                <a href="/incidents/<%= incident.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"><i class="fa fa-pencil"></i></button></a>
+                                <a href=<%=incident_path(incident)%> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                              <% end %>
+                            </div>
+                          </div>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </section>
+            <section class="task-panel tasks-widget">
+            <div class="panel-heading">
+                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Problemas</h5></div><br>
+                <div class="pull-right hidden-phone"> 
+                  <a href='/problems/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-plus"></i></button></a>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="task-content">
+                  <ul class="task-list">
+                  <% @problems.each do |problem| %>
+                    <li class=<%= problem.state %>>
+                        <div class="task-title">
+                          <span class="task-title-sp"><%= link_to problem.title, problem_path(problem) %></span>
+                          <div class="pull-right hidden-phone">
+                            <% if current_user.creator_cases?(problem.id, 'problem') %>
+                              <a href="/problems/<%= problem.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-pencil"></i></button></a>
+                              <a href=<%= problem_path(problem) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                            <% end %>
+                          </div>
+                        </div>
+                    </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </section>
+      </div>
+      </div>
+    </section>
+    <%= javascript_include_tag 'home' %>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<section id="container" class="sidebar-closed container" >
+  <!-- Header -->
+    <%= render 'shared/header'%>
+  <!-- End header -->
+  <div id="main-content" class="wrapper">
+    <div class="form-user">
+      <%= form_for @user do |f| %>
+        <div class="field">
+          <%= f.text_field :full_name, placeholder: 'Nombre Completo', class: 'edit' %>
+          <% unless @user.errors[:full_name].blank? %>
+            <div class="alert-box error radius">
+              <span><%= @user.errors[:full_name].join(', ') %></span>
+            </div>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= f.text_field :customer_id, placeholder: 'Identificación', class: 'edit' %>
+          <% unless @user.errors[:customer_id].blank? %>
+            <div class="alert-box error radius">
+              <span><%= @user.errors[:customer_id].join(', ') %></span>
+            </div>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= f.text_field :phone, placeholder: 'Telefono', class: 'edit' %>
+          <% unless @user.errors[:phone].blank? %>
+            <div class="alert-box error radius">
+              <span><%= @user.errors[:phone].join(', ') %></span>
+            </div>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= f.text_field :email, placeholder: 'Correo', class: 'edit' %>
+          <% unless @user.errors[:email].blank? %>
+            <div class="alert-box error radius">
+              <span><%= @user.errors[:email].join(', ') %></span>
+            </div>
+          <% end %>
+        </div>
+        <div class="field">
+          <div class="toggle-demo">
+            <label class="edit">Tipo de usuario</label>
+            <div class="switch-toggle switch-3 switch-android edit">
+              <input id="user_rank1" name="user[rank]" type="radio" value="sa" checked="">
+              <label for="user_rank1" style="border-left: 1px solid rgba(63, 64, 65, 1);">Super Administrador</label>
+              <input id="user_rank2" name="user[rank]" type="radio" value="administrador" checked="">
+              <label for="user_rank2" onclick="">Administrador</label>
+              <input id="user_rank3" name="user[rank]" type="radio" value="usuario" checked="">
+              <label for="user_rank3">Usuario</label>
+              <a></a>
+            </div>
+          </div>
+        </div>
+              <!--
+        <div class="btn-group btn-group-justified">
+            <div class="btn-group">
+              <input id="user_rank" name="user[rank]" type="radio" value="sa" checked="">
+              <button class="btn btn-theme">Super Usuario</button>
+            </div>
+            <div class="btn-group">
+              <input id="user_rank" name="user[rank]" type="radio" value="administrador" checked="">
+              <button type="button" class="btn btn-theme" disabled="">Administrador</button>
+            </div>
+            <div class="btn-group">
+              <input id="user_rank" name="user[rank]" type="radio" value="usuario" checked="">
+              <button type="radio" class="btn btn-theme" disabled="">Usuario</button>
+            </div>
+          <% unless @user.errors[:rank].blank? %>
+            <div class="alert-box error radius">
+              <span><%= @user.errors[:rank].join(', ') %></span>
+            </div>
+          <% end %>
+        </div>
+        -->
+        <div class="field">
+          <%= f.password_field :password, placeholder: 'Contraseña', class: 'edit' %>
+          <% unless @user.errors[:password].blank? %>
+            <div class="alert-box error radius">
+              <span><%= @user.errors[:password].join(', ') %></span>
+            </div>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= f.password_field :password_confirmation, placeholder: 'Repetir contraseña', class: 'edit' %>
+          <% unless @user.errors[:password_confirmation].blank? %>
+            <div class="alert-box error radius">
+              <span><%= @user.errors[:password_confirmation].join(', ') %></span>
+            </div>
+          <% end %>
+        </div>
+        <%= f.submit 'Sign Up', class: 'btn btn-primary btn-block main' %>
+      <% end %>
+    </div>
+  </div>
+</section>
+

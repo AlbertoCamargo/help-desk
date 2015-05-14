@@ -1,0 +1,6 @@
+if (<%= !@incident.errors.empty? %>) {
+  $('#error-title-incident').html(function() { return  "<%= @incident.errors[:title].join(', ') %>" })
+  $('#error-description-incident').html(function() { return  "<%= @incident.errors[:description].join(', ') %>" })
+}else{
+  location.reload()
+}

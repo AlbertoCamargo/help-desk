@@ -1,0 +1,4 @@
+$('#modal-8 #incident_title').val("<%= @incident.title %>")
+$('#modal-8 #incident_description').val("<%= @incident.description %>")
+$('#new_incident').attr('action', "<%= incident_path(@incident) %>");
+$('#new_incident').attr('method', 'patch');
