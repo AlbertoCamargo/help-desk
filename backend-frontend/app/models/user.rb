@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates :customer_id, :email, :full_name, :phone, :rank, :password, :password_confirmation, presence: true
   validates :customer_id, :email, uniqueness: true
   validates :customer_id, :phone, numericality: { only_integer: true }
+  validates :phone, is: 10
   validates :password, confirmation: true 
 
   before_save :format_attributes

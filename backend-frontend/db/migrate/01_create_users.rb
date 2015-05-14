@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :customer_id,      null: false
       t.string :full_name,         null: false
       t.string :email,             null: false
-      t.integer :phone,            null: false
+      t.integer :phone,            null: false, limit: 10
       t.string :image
       t.string :rank,              null: false
       t.boolean :first_time
