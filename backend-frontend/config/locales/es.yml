@@ -13,7 +13,7 @@ es:
               not_a_number: 'El campo debe ser numerico'
             phone:
               blank: "Campo vacio"
-              not_a_number: 'El campo debe ser numercio'
+              not_a_number: 'El campo debe ser numerico'
             email:
               blank: "Campo vacio"
             password:
@@ -32,22 +32,22 @@ es:
             description:
               blank: "Campo vacio"
         incident:
-        	attributes:
-        		title:
-        			blank: "Campo vacio"
-        		description:
-        			blank: "Campo vacio"
+          attributes:
+            title:
+              blank: "Campo vacio"
+            description:
+              blank: "Campo vacio"
         problem:
-        	attributes:
-        		title:
-        			blank: "Campo vacio"
-        		description:
-        			blank: "Campo vacio"
+          attributes:
+            title:
+              blank: "Campo vacio"
+            description:
+              blank: "Campo vacio"
         comments_incident:
-        	attributes:
-        		description:
-        			blank: "Campo vacio"
+          attributes:
+            description:
+              blank: "Campo vacio"
         comments_problem:
-        	attributes:
-        		description:
-        			blank: "Campo vacio"
+          attributes:
+            description:
+              blank: "Campo vacio"

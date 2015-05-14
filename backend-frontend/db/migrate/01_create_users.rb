@@ -3,8 +3,8 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.integer :customer_id,      null: false
       t.string :full_name,         null: false
-      t.string :email,             null: false
-      t.integer :phone,            null: false, limit: 10
+      t.string :email
+      t.integer :phone
       t.string :image
       t.string :rank,              null: false
       t.boolean :first_time
