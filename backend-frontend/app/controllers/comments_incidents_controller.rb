@@ -41,9 +41,11 @@ class CommentsIncidentsController < ApplicationController
   end
 
   def destroy
-    change_state(@comments_incident, 'unanswered') if @comments_incident.incident.has_one_comment?
-    @comments_incident.destroy
-    redirect_to incident_path(params[:incident_id])
+    if current_user.creator_cases?(params[:id], 'incident') || current_user.is_sa? || current_user.is_admin?
+      change_state(@comments_incident, 'unanswered') if @comments_incident.incident.has_one_comment?
+      @comments_incident.destroy
+      redirect_to incident_path(params[:incident_id])
+    end
   end
 
   private

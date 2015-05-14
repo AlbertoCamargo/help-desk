@@ -27,22 +27,28 @@ class IncidentsController < ApplicationController
 
   def edit
     respond_to do |format|
-      @incident = current_user.incidents.find(params[:id])
+      @incident = Incidents.find(params[:id])
       format.js
     end
   end
 
   def update
     respond_to do |format|
-      @incident.assign_attributes(params_incident)
-      @incident.save
-      format.js
+      if current_user.creator?(params[:id], 'incident') || current_user.is_sa?
+        @incident.assign_attributes(params_incident)
+        @incident.save
+        format.js
+      else
+        redirect_to :home
+      end
     end
   end
 
   def destroy
-    @incident.destroy
-    redirect_to :home, notice: 'Se ha eliminado correctamente el incidente'
+    if current_user.creator?(params[:id], 'incident') || current_user.is_sa?
+      @incident.destroy
+    end
+    redirect_to :home
   end
 
   def finished
@@ -61,7 +67,7 @@ class IncidentsController < ApplicationController
   end
 
   def find_incident
-    @incident = current_user.incidents.find(params[:id])
+    @incident = Incidents.find(params[:id])
   end
 
   def change_state(incident, state)
