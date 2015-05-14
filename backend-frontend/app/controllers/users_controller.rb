@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :find_user, except: [:index, :new, :create]
+  before_action :require_sa
   
   def index
     @users = User.all
@@ -48,5 +49,11 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def require_sa
+    if current_user.rank != 'sa'
+      redirect_to :home
+    end
   end
 end
