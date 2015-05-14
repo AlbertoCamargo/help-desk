@@ -31,3 +31,23 @@ es:
           attributes:
             description:
               blank: "Campo vacio"
+        incident:
+        	attributes:
+        		title:
+        			blank: "Campo vacio"
+        		description:
+        			blank: "Campo vacio"
+        problem:
+        	attributes:
+        		title:
+        			blank: "Campo vacio"
+        		description:
+        			blank: "Campo vacio"
+        comments_incident:
+        	attributes:
+        		description:
+        			blank: "Campo vacio"
+        comments_problem:
+        	attributes:
+        		description:
+        			blank: "Campo vacio"
