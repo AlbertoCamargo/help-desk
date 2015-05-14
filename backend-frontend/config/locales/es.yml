@@ -1,31 +1,33 @@
 es:
-	activerecord:
-		errors:
-			models:
-				request:
-					attributes:
-						title:
-  						blank: "Campo vacio"
-  					description:
-  						blank: "Campo vacio"
-  			user:
-  				attributes:
-  					full_name:
-  						blank: "Campo vacio"
-  					customer_id:
-  						blank: "Campo vacio"
-  						not_a_number: 'El campo debe ser numerico'
-  					phone:
-  						blank: "Campo vacio"
-  						not_a_number: 'El campo debe ser numercio'
-  					email:
-  						blank: "Campo vacion"
-  					password:
-  						blank: "Campo vacio"
-  					password_confirmation:
-  						blank: "Campo vacio"
-  						confirmation: "Las contraseñas no coinciden"
-  			comments_request:
-  				attributes:
-  					description:
-  						blank: "Campo vacio"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: 'sirve esta caga'
+              full_name:
+              blank: "Campo vacio"
+            customer_id:
+              blank: "Campo vacio"
+              not_a_number: 'El campo debe ser numerico'
+            phone:
+              blank: "Campo vacio"
+              not_a_number: 'El campo debe ser numercio'
+            email:
+              blank: "Campo vacio"
+            password:
+              blank: "Campo vacio"
+            password_confirmation:
+              blank: "Campo vacio"
+              confirmation: "Las contraseñas no coinciden"
+        request:
+          attributes:
+            title:
+              blank: "Campo vacio"
+            description:
+              blank: "Campo vacio"
+        comments_request:
+          attributes:
+            description:
+              blank: "Campo vacio"
