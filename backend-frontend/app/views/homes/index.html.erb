@@ -121,8 +121,10 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to request.title, request_path(request) %></span>
                             <div class="pull-right hidden-phone">
-                              <a href="/requests/<%= request.id %>/edit" data-remote="true" ><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-pencil"></i></button></a>
-                              <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                              <% if current_user.creator_cases?(request.id, 'request') %>
+                                <a href="/requests/<%= request.id %>/edit" data-remote="true" ><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-pencil"></i></button></a>
+                                <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                              <% end %>
                             </div>
                           </div>
                       </li>
@@ -146,8 +148,10 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to incident.title, incident_path(incident) %></span>
                             <div class="pull-right hidden-phone">
-                              <a href="/incidents/<%= incident.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"><i class="fa fa-pencil"></i></button></a>
-                              <a href=<%=incident_path(incident)%> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                              <% if current_user.creator_cases?(incident.id, 'incident') %>
+                                <a href="/incidents/<%= incident.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"><i class="fa fa-pencil"></i></button></a>
+                                <a href=<%=incident_path(incident)%> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                              <% end %>
                             </div>
                           </div>
                       </li>
@@ -171,8 +175,10 @@
                         <div class="task-title">
                           <span class="task-title-sp"><%= link_to problem.title, problem_path(problem) %></span>
                           <div class="pull-right hidden-phone">
-                            <a href="/problems/<%= problem.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-pencil"></i></button></a>
-                            <a href=<%= problem_path(problem) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                            <% if current_user.creator_cases?(problem.id, 'problem') %>
+                              <a href="/problems/<%= problem.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-pencil"></i></button></a>
+                              <a href=<%= problem_path(problem) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                            <% end %>
                           </div>
                         </div>
                     </li>
