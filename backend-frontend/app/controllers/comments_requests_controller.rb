@@ -41,9 +41,11 @@ class CommentsRequestsController < ApplicationController
   end
 
   def destroy
-    change_state(@comments_request, 'unanswered') if @comments_request.request.has_one_comment?
-    @comments_request.destroy
-    redirect_to request_path(params[:request_id])
+    if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa? || current_user.is_admin?
+      change_state(@comments_request, 'unanswered') if @comments_request.request.has_one_comment?
+      @comments_request.destroy
+      redirect_to request_path(params[:request_id])
+    end
   end
 
   private
