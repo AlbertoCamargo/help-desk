@@ -21,6 +21,7 @@ class IncidentsController < ApplicationController
     respond_to do |format|
       @incident = current_user.incidents.build(params_incident)
       @incident.save
+      flash[:notice] = 'Incidente creado exitosamente'
       format.js
     end
   end
@@ -37,6 +38,7 @@ class IncidentsController < ApplicationController
       if current_user.creator?(params[:id], 'incident') || current_user.is_sa?
         @incident.assign_attributes(params_incident)
         @incident.save
+        flash[:notice] = 'Se ha actualizado correctamente el incidente'
         format.js
       else
         redirect_to :home
@@ -47,6 +49,7 @@ class IncidentsController < ApplicationController
   def destroy
     if current_user.creator?(params[:id], 'incident') || current_user.is_sa?
       @incident.destroy
+      flash[:notice] = 'Incidente eliminado correctamente'
     end
     redirect_to :home
   end
