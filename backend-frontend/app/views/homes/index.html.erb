@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-
-<!--<% if flash[:notice] %>
-  <%= flash[:notice] %>
-<% end %>
-</br>-->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -108,7 +103,7 @@
         <div class="tables">
           <section class="task-panel tasks-widget">
             <div class="panel-heading">
-                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Sugerencias</h5></div><br>
+                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Sugerencias &nbsp &nbsp<span class="badge bg-inverse"><%= @data[:request_finished] %>/<%= @data[:num_request] %></span></h5></div><br>
                 <div class="pull-right hidden-phone"> 
                   <a href='/requests/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-plus"></i></button></a>
                 </div>
@@ -135,7 +130,7 @@
             </section>
             <section class="task-panel tasks-widget">
               <div class="panel-heading">
-                  <div class="pull-left"><h5><i class="fa fa-tasks"></i>Incidentes</h5> </div><br>
+                  <div class="pull-left"><h5><i class="fa fa-tasks"></i>Incidentes &nbsp&nbsp <span class="badge bg-inverse"><%= @data[:incident_finished] %>/<%= @data[:num_incident] %></span></h5></div><br>
                   <div class="pull-right hidden-phone"> 
                     <a href='/incidents/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"> <i class="fa fa-plus"></i></button></a>
                   </div>
@@ -162,7 +157,7 @@
             </section>
             <section class="task-panel tasks-widget">
             <div class="panel-heading">
-                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Problemas</h5></div><br>
+                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Problemas &nbsp&nbsp <span class="badge bg-inverse"><%= @data[:problem_finished] %>/<%= @data[:num_problem] %></span></h5></div><br>
                 <div class="pull-right hidden-phone"> 
                   <a href='/problems/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-plus"></i></button></a>
                 </div>
@@ -191,11 +186,20 @@
       </div>
     </section>
     <%= javascript_include_tag 'home' %>
+    <span id= 'message' style="display: none;"> <%= flash[:notice] %> </span>
+    <script type="text/javascript">
+      var message = $('#message').text()
+      console.log((message === undefined));
+      console.log(message);
+      console.log($('#message').text())
+      if (!(message.length == 2)) {
+        $.gritter.add({
+              // (string | mandatory) the heading of the notification
+              title: 'Notificación',
+              // (string | mandatory) the text inside the notification
+              text: $('#message').text()
+        });
+      }
+    </script>
   </body>
 </html>
-<h2><%= @data[:num_problem] %></h2>
-<h2><%= @data[:num_incident] %></h2>
-<h2><%= @data[:num_request] %></h2>
-<h2><%= @data[:problem_finished] %></h2>
-<h2><%= @data[:incident_finished] %></h2>
-<h2><%= @data[:request_finished] %></h2>

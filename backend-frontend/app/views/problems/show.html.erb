@@ -118,21 +118,21 @@
                 </ul>
               <% end %>
             <% end %>
+            <% if current_user.creator_cases?(@problem.id, 'problem') %>
+              <div class="close-case">
+                <% if @problem.state != 'answered' %>
+                  <a class ="not-solve" href="/problems/finished/<%= @problem.id %>" data-method="post">
+                    <i class="fa fa-ban fa-2x"></i>
+                  </a>
+                <% else %>
+                  <a class ="solve" href="/problems/open/<%= @problem.id %>" data-method="post">
+                    <i class="fa fa-ban fa-2x"></i>
+                  </a>
+                  <span> Caso cerrado por <b> <%= @problem.user.full_name %> </b> el <b> <%= @problem.updated_at %> </b> </span>
+                <% end %>
+              </div>
+            <% end %>
           </li>
-          <% if current_user.creator_cases?(@problem.id, 'problem') %>
-            <div class="close-case">
-              <% if @problem.state != 'answered' %>
-                <a class ="not-solve" href="/finished/<%= @problem.id %>" data-method="post">
-                  <i class="fa fa-ban fa-2x"></i>
-                </a>
-              <% else %>
-                <a class ="solve" href="/open/<%= @problem.id %>" data-method="post">
-                  <i class="fa fa-ban fa-2x"></i>
-                </a>
-                <span> Caso cerrado por <b> <%= @problem.user.full_name %> </b> el <b> <%= @problem.updated_at %> </b> </span>
-              <% end %>
-            </div>
-          <% end %>
         </ul>
       </div>
     </div>
