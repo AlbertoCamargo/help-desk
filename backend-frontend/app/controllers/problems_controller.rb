@@ -67,7 +67,7 @@ class ProblemsController < ApplicationController
   end
 
   def find_problem
-  	@problem = Problems.find(params[:id])
+  	@problem = Problem.find(params[:id])
   end
 
   def change_state(problem, state)

@@ -67,7 +67,7 @@ class IncidentsController < ApplicationController
   end
 
   def find_incident
-    @incident = Incidents.find(params[:id])
+    @incident = Incident.find(params[:id])
   end
 
   def change_state(incident, state)

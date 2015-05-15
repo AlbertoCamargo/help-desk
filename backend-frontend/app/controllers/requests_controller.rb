@@ -68,7 +68,7 @@ class RequestsController < ApplicationController
   end
 
   def find_request
-    @request = Requests.find(params[:id])
+    @request = Request.find(params[:id])
   end
 
   def change_state(request, state)
