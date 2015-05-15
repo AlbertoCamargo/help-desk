@@ -15,10 +15,10 @@ class PasswordsController < ApplicationController
     @user.password_confirmation = params[:user][:password_confirmation]
     @user.first_time = false if @user.first_time
     unless @user.change_password!(params[:user][:password])
-      flash.now[:notice] = 'Error en el password'
       render :edit
     else
-      redirect_to :home, notice: 'Su contraseña se ha actualizado correctamente' 
+      flash[:notice] = 'Su contraseña se ha actualizado correctamente'
+      redirect_to :home
     end
   end
 end

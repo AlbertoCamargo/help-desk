@@ -12,6 +12,8 @@
  *
  *= require bootstrap
  *= require font-awesome
+ *= require jquery.gritter.css
+ *= require jquery.gritter0.css
  *= require style
  *= require style-responsive
  *= require to-do

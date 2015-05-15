@@ -86,7 +86,11 @@ ActiveRecord::Schema.define(version: 10) do
     t.integer  "customer_id",                                    null: false
     t.string   "full_name",                                      null: false
     t.string   "email"
+<<<<<<< HEAD
     t.integer  "phone"
+=======
+    t.string   "phone"
+>>>>>>> ebbe5097cff5490c4afc79467063249142304269
     t.string   "image"
     t.string   "rank",                                           null: false
     t.boolean  "first_time",                      default: true
@@ -102,7 +106,6 @@ ActiveRecord::Schema.define(version: 10) do
   end
 
   add_index "users", ["customer_id"], name: "index_users_on_customer_id", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
 

@@ -1,13 +1,25 @@
-<h1>Reestablecimiento de contraseña</h1>
-<h2>Introduce la nueva contraseña:</h2>
-<%= form_for @user, url: :password do |f| %>
-  <%= f.password_field :password, placeholder: 'Contraseña nueva' %>
-  <% unless @user.errors[:password].blank? %>
-    <span><%= @user.errors[:password].join(', ') %></span>
-  <% end %>
-  <%= f.password_field :password_confirmation, placeholder: 'Repetir contraseña'  %>
-  <% unless @user.errors[:password_confirmation].blank? %>
-    <span><%= @user.errors[:password_confirmation].join(', ') %></span>
-  <% end %>
-  <%= f.submit 'Cambiar contraseña' %>
-<% end %>
+<div class="container colored" >
+ <div class="col-md-4"></div>
+  <div class="col-md-4">
+      <div class="container" style="margin-top: 30px">
+          <div class="col-md-4">
+            <%= form_for @user, url: :password do |f| %>
+              <form>
+                <h3 class="text-center">Establecer nueva contraseña</h3>
+                <label for="Email" class="sr-only">Email </label>
+                <%= f.password_field :password, placeholder: 'Contraseña nueva', class: 'form-control', autofocus: "autofocus"%>
+                <% unless @user.errors[:password].blank? %>
+                  <span class="has-error"><%= @user.errors[:password].join(', ') %></span>
+                <% end %>
+                <label for="pwd" class="sr-only">Password</label>
+                <%= f.password_field :password_confirmation, placeholder: 'Repetir contraseña', class: 'form-control', required: "required" %>
+                <% unless @user.errors[:password_confirmation].blank? %>
+                  <span class="has-error"><%= @user.errors[:password_confirmation].join(', ') %></span>
+                <% end %>
+                <%= f.submit 'Cambiar contraseña', class: "btn btn-sm btn-primary btn-block" %>
+              </form>
+            <% end %>
+          </div>
+      </div>
+    </div>
+</div>

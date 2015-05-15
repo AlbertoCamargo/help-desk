@@ -21,6 +21,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       @request = current_user.requests.build(params_request)
       @request.save
+      flash[:notice] = 'Sugerencia creado exitosamente'
       format.js  
     end
   end
@@ -37,6 +38,7 @@ class RequestsController < ApplicationController
       if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
         @request.assign_attributes(params_request)
         @request.save
+        flash[:notice] = 'Se ha actualizado correctamente la sugerencia'
         format.js
       else
         redirect_to :home
@@ -48,6 +50,7 @@ class RequestsController < ApplicationController
   def destroy
     if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
       @request.destroy
+      flash[:notice] = 'Sugerencia eliminada correctamente'
     end
     redirect_to :home
   end
@@ -68,7 +71,7 @@ class RequestsController < ApplicationController
   end
 
   def find_request
-    @request = Requests.find(params[:id])
+    @request = Request.find(params[:id])
   end
 
   def change_state(request, state)

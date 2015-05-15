@@ -1,19 +1,24 @@
 <header class="header black-bg">
-  <a href='/' class="logo"><b><%= @message  || 'HELP DESK'%></b></a>
+  <a href='/' class="logo"><b><%= @message  || 'HELP DESK' %></b></a>
   <div class="nav notify-row" id="top_menu">
   <ul class="nav top-menu">
     <li>
-      <a href="#">
+      <a href="/">
         <i class="fa fa-home"> </i>
       </a>
     </li>
-    <%# if current_user.is_sa? %>
+    <% if current_user.is_sa? %>
+      <li>
+        <a href= <%= users_path %> >
+          <i class="fa fa-users"></i>
+        </a>
+      </li>
       <li>
         <a href= <%= new_user_path %> >
           <i class="fa fa-user-plus"></i>
         </a>
       </li>
-    <%# end %>
+    <% end %>
   </ul>
   </div>
   <div class="top-menu">

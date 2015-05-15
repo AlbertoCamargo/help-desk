@@ -118,21 +118,21 @@
                       </ul>
                     <% end %>
                   <% end %>
-                </li>
-                <% if current_user.creator_cases?(@incident.id, 'incident') %>
+                  <% if current_user.creator_cases?(@incident.id, 'incident') %>
                   <div class="close-case">
                     <% if @incident.state != 'answered' %>
-                      <a class ="not-solve" href="/finished/<%= @incident.id %>" data-method="post">
+                      <a class ="not-solve" href="/incidents/finished/<%= @incident.id %>" data-method="post">
                         <i class="fa fa-ban fa-2x"></i>
                       </a>
                     <% else %>
-                      <a class ="solve" href="/open/<%= @incident.id %>" data-method="post">
+                      <a class ="solve" href="/incidents/open/<%= @incident.id %>" data-method="post">
                         <i class="fa fa-ban fa-2x"></i>
                       </a>
                       <span> Caso cerrado por <b> <%= @incident.user.full_name %> </b> el <b> <%= @incident.updated_at %> </b> </span>
                     <% end %>
                   </div>
                 <% end %>
+                </li>
               </ul>
             </div>
           </div>

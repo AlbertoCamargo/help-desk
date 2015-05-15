@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :customer_id,      null: false
       t.string :full_name,         null: false
       t.string :email
-      t.integer :phone
+      t.string :phone
       t.string :image
       t.string :rank,              null: false
       t.boolean :first_time,       default: true
@@ -24,7 +24,6 @@ class CreateUsers < ActiveRecord::Migration
     end
 
     add_index :users, :customer_id, unique: true
-    add_index :users, :email, unique: true
     add_index :users, :remember_me_token
     add_index :users, :reset_password_token
   end
