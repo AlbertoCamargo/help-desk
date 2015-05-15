@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :phone,            null: false, limit: 10
       t.string :image
       t.string :rank,              null: false
-      t.boolean :first_time
+      t.boolean :first_time,       default: true
       t.string :crypted_password,  null: false
       t.string :salt,              null: false
 

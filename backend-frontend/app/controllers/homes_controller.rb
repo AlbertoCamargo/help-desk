@@ -9,5 +9,17 @@ class HomesController < ApplicationController
     @problem = Problem.new
     @request = Request.new
     @incident = Incident.new
+    stadistic
+  end
+
+  private
+  def stadistic
+    @data = {}
+    @data[:num_problem] = Problem.count
+    @data[:num_incident] = Incident.count
+    @data[:num_request] = Request.count
+    @data[:problem_finished] = Problem.where(rank: 'answered').count
+    @data[:incident_finished] = Incident.where(rank: 'answered').count
+    @data[:request_finished] = Request.where(rank: 'answered').count
   end
 end
