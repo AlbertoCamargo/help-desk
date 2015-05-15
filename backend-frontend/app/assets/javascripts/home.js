@@ -13,6 +13,8 @@
 //= require jquery
 //= require boostrap.min
 //= require classie
+//= require jquery.gritter.js
+//= require gritter-conf.js
 //= require jquery.dcjqaccordion.2.7
 //= require jquery.scrollTo.min
 //= require jquery.nicescroll.js

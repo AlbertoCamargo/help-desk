@@ -5,8 +5,6 @@ es:
         user:
           attributes:
             full_name:
-              blank: 'sirve esta caga'
-              full_name:
               blank: "Campo vacio"
             customer_id:
               blank: "Campo vacio"

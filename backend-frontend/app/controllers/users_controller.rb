@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params_user)
     if @user.save
-      redirect_to :home, notice: 'El usuario se a creado satisfactoriamente'
+      redirect_to :users, notice: 'El usuario se a creado satisfactoriamente'
     else
       flash.now[:notice] = 'Error al crear el usuario'
       render :new
