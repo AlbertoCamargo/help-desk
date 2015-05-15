@@ -34,7 +34,7 @@ class ProblemsController < ApplicationController
 
   def update
     respond_to do |format|
-      if current_user.creator?(params[:id], 'problem') || current_user.is_sa?
+      if current_user.creator_cases?(params[:id], 'problem') || current_user.is_sa?
     	  @problem.assign_attributes(problem_params)
     	  @problem.save
         format.js
@@ -45,7 +45,7 @@ class ProblemsController < ApplicationController
   end
 
   def destroy
-    if current_user.creator?(params[:id], 'problem') || current_user.is_sa?
+    if current_user.creator_cases?(params[:id], 'problem') || current_user.is_sa?
     	@problem.destroy	
     end
     redirect_to :home

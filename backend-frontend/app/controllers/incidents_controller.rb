@@ -34,7 +34,7 @@ class IncidentsController < ApplicationController
 
   def update
     respond_to do |format|
-      if current_user.creator?(params[:id], 'incident') || current_user.is_sa?
+      if current_user.creator_cases?(params[:id], 'incident') || current_user.is_sa?
         @incident.assign_attributes(params_incident)
         @incident.save
         format.js
@@ -45,7 +45,7 @@ class IncidentsController < ApplicationController
   end
 
   def destroy
-    if current_user.creator?(params[:id], 'incident') || current_user.is_sa?
+    if current_user.creator_cases?(params[:id], 'incident') || current_user.is_sa?
       @incident.destroy
     end
     redirect_to :home

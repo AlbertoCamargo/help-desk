@@ -34,7 +34,7 @@ class RequestsController < ApplicationController
 
   def update
     respond_to do |format|
-      if current_user.creator?(params[:id], 'request') || current_user.is_sa?
+      if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
         @request.assign_attributes(params_request)
         @request.save
         format.js
@@ -46,7 +46,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    if current_user.creator?(params[:id], 'request') || current_user.is_sa?
+    if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
       @request.destroy
     end
     redirect_to :home
