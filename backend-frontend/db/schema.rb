@@ -83,15 +83,15 @@ ActiveRecord::Schema.define(version: 10) do
   add_index "requests", ["user_id"], name: "index_requests_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.integer  "customer_id",                                null: false
-    t.string   "full_name",                                  null: false
-    t.string   "email",                                      null: false
-    t.integer  "phone",                           limit: 10, null: false
+    t.integer  "customer_id",                                    null: false
+    t.string   "full_name",                                      null: false
+    t.string   "email"
+    t.string   "phone"
     t.string   "image"
-    t.string   "rank",                                       null: false
-    t.boolean  "first_time"
-    t.string   "crypted_password",                           null: false
-    t.string   "salt",                                       null: false
+    t.string   "rank",                                           null: false
+    t.boolean  "first_time",                      default: true
+    t.string   "crypted_password",                               null: false
+    t.string   "salt",                                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_me_token"
@@ -102,7 +102,6 @@ ActiveRecord::Schema.define(version: 10) do
   end
 
   add_index "users", ["customer_id"], name: "index_users_on_customer_id", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
 

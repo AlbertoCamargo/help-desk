@@ -35,15 +35,6 @@
                 <% end %>
                 <td>
                   <% unless user.is_sa? %>
-                    <div class="showback">
-                <h4><i class="fa fa-angle-right"></i> Gritter Examples</h4>
-              <p>Click on below buttons to check it out.</p>
-              <a id="add-regular" class="btn btn-default btn-sm" href="javascript:;">Regular</a>
-              <a id="add-sticky" class="btn btn-success  btn-sm" href="javascript:;">Sticky</a>
-              <a id="add-without-image" class="btn btn-info  btn-sm" href="javascript:;">Imageless</a>
-              <a id="add-gritter-light" class="btn btn-warning  btn-sm" href="javascript:;">Light</a>
-              <a id="remove-all" class="btn btn-danger  btn-sm" href="general.html#">Remove all</a>
-              </div>
                     <a href= <%= edit_user_path(user)%> > <button class="btn btn-primary btn-xs md-trigger"> <i class="fa fa-pencil"></i> 
                     </button></a>
                     <a href=<%= user_path(user) %> data-method="delete"> <button class="btn btn-danger btn-xs "><i class="fa fa-trash-o ">
@@ -58,9 +49,3 @@
     </div>
   </div>    
 </section>
-
-
-
-
-
-

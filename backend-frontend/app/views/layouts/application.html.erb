@@ -20,5 +20,20 @@
   <body>
     <%= yield %>
     <%= javascript_include_tag 'home' %>
+    <span id= 'message' style="display: none;"> <%= flash[:notice] %> </span>
+    <script type="text/javascript">
+      var message = $('#message').text()
+      console.log((message === undefined));
+      console.log(message);
+      console.log($('#message').text())
+      if (!(message.length == 2)) {
+        $.gritter.add({
+              // (string | mandatory) the heading of the notification
+              title: 'Notificación',
+              // (string | mandatory) the text inside the notification
+              text: $('#message').text()
+        });
+      }
+  </script>
   </body>
 </html>

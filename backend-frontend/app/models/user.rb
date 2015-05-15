@@ -11,9 +11,11 @@ class User < ActiveRecord::Base
   has_many :comments_requests,   dependent: :delete_all
 
   validates :customer_id, :full_name, :rank, :password, :password_confirmation, presence: true
-  validates :customer_id, :email, uniqueness: true
-  validates :customer_id, :phone, numericality: { only_integer: true }
+  validates :customer_id,  uniqueness: true
+  validates :email, uniqueness: true, unless: 'email.blank?'
+  validates :customer_id, :phone, numericality: { only_integer: true }, unless: 'phone.blank?'
   validates :password, confirmation: true 
+  
 
   before_save :format_attributes
 
@@ -51,7 +53,7 @@ class User < ActiveRecord::Base
 
   private
   def format_attributes
-    self.email.downcase!
+    self.email.try(:downcase!)
     self.full_name.downcase!
   end
 end
