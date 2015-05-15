@@ -1,10 +1,10 @@
 <% @users.each do |user| %>
-      <tr>
-      <% unless current_user.is_sa? %>
-        <td><%= link_to user.full_name, user_path(user) %></td>
-        <td><%= user.rank %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-         <td><%= link_to 'Delete', user_path(user), method: :delete %></td>
-      <% end %> 
-      </tr>    
+  <tr>
+    <td><%= link_to user.full_name, user_path(user) %></td>
+    <td><%= user.rank %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <% unless current_user.is_sa? %>
+      <td><%= link_to 'Delete', user_path(user), method: :delete %></td>
+    <% end %> 
+  </tr>    
 <% end %>
