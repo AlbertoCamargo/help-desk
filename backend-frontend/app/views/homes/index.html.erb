@@ -193,4 +193,9 @@
     <%= javascript_include_tag 'home' %>
   </body>
 </html>
-<h2>@data.num_problem</h2>
+<h2><%= @data[:num_problem] %></h2>
+<h2><%= @data[:num_incident] %></h2>
+<h2><%= @data[:num_request] %></h2>
+<h2><%= @data[:problem_finished] %></h2>
+<h2><%= @data[:incident_finished] %></h2>
+<h2><%= @data[:request_finished] %></h2>
