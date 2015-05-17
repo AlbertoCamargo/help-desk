@@ -21,7 +21,7 @@ class RequestsController < ApplicationController
     respond_to do |format|
       @request = current_user.requests.build(params_request)
       @request.save
-      flash[:notice] = 'Sugerencia creado exitosamente'
+      flash[:notice] = 'Sugerencia creada exitosamente'
       format.js  
     end
   end

@@ -38,7 +38,7 @@ class ProblemsController < ApplicationController
       if current_user.creator?(params[:id], 'problem') || current_user.is_sa?
     	  @problem.assign_attributes(problem_params)
     	  @problem.save
-        flash[:notice] = 'Se ha actualizado correctamente el Problema'
+        flash[:notice] = 'Se ha actualizado correctamente el problema'
         format.js
       else
         redirect_to :home
