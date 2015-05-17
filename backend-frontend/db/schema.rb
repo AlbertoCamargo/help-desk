@@ -86,7 +86,11 @@ ActiveRecord::Schema.define(version: 10) do
     t.integer  "customer_id",                                    null: false
     t.string   "full_name",                                      null: false
     t.string   "email"
+<<<<<<< HEAD
+    t.integer  "phone"
+=======
     t.string   "phone"
+>>>>>>> ebbe5097cff5490c4afc79467063249142304269
     t.string   "image"
     t.string   "rank",                                           null: false
     t.boolean  "first_time",                      default: true

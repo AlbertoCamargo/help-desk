@@ -26,8 +26,15 @@ if Rails.env.development?
   end
 =begin
 
+<<<<<<< HEAD
+  user = User.new(customer_id: 123456, full_name: Faker::Name.name, email: Faker::Internet.email, 
+                  phone: '30123557', rank: 'sa', 
+                  password: '123456', password_confirmation: '123456').save
+
+=======
     user = User.new(customer_id: 123456, full_name: Faker::Name.name, email: Faker::Internet.email, 
                     phone: '30123557', rank: 'sa', 
                     first_time: false, password: '123456', password_confirmation: '123456').save
 =end
+>>>>>>> ebbe5097cff5490c4afc79467063249142304269
 end 

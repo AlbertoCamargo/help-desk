@@ -35,7 +35,7 @@ class RequestsController < ApplicationController
 
   def update
     respond_to do |format|
-      if current_user.creator?(params[:id], 'request') || current_user.is_sa?
+      if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
         @request.assign_attributes(params_request)
         @request.save
         flash[:notice] = 'Se ha actualizado correctamente la sugerencia'
@@ -48,7 +48,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    if current_user.creator?(params[:id], 'request') || current_user.is_sa?
+    if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
       @request.destroy
       flash[:notice] = 'Sugerencia eliminada correctamente'
     end
