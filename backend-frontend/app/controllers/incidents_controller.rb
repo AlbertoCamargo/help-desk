@@ -1,6 +1,6 @@
 class IncidentsController < ApplicationController
   
-  before_action :find_incident, only: [:update, :destroy]
+  before_action :find_incident, only: [:update, :destroy, :finished, :open]
 
   def show
     @incident = current_user.is_customer? ? current_user.incidents.find(params[:id]) : Incident.find(params[:id])
@@ -28,7 +28,7 @@ class IncidentsController < ApplicationController
 
   def edit
     respond_to do |format|
-      @incident = Incidents.find(params[:id])
+      @incident = Incident.find(params[:id])
       format.js
     end
   end

@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   
-  before_action :find_request, only: [:update, :destroy]
+  before_action :find_request, only: [:update, :destroy, :finished, :open]
 
   def show
     @request = current_user.is_customer? ? current_user.requests.find(params[:id]) : Request.find(params[:id])
@@ -28,7 +28,7 @@ class RequestsController < ApplicationController
 
   def edit
     respond_to do |format|
-      @request = Requests.find(params[:id])
+      @request = Request.find(params[:id])
       format.js
     end
   end

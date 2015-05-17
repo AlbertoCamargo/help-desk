@@ -1,80 +1,82 @@
 <section id="container" class="sidebar-closed container" >
   <!-- Header -->
-    <% @message = 'Editar usuario' %>
     <%= render 'shared/header'%>
   <!-- End header -->
   <div id="main-content" class="wrapper">
-    <div class="form-user">
-      <%= form_for @user do |f| %>
-        <div class="field">
-          <%= f.text_field :full_name, placeholder: 'Nombre Completo', class: 'edit', autocomplete: 'off' %>
-          <% unless @user.errors[:full_name].blank? %>
-            <div class="alert-box error radius">
-              <span><%= @user.errors[:full_name].join(', ') %></span>
-            </div>
-          <% end %>
-        </div>
-        <div class="field">
-          <%= f.text_field :customer_id, placeholder: 'Identificación', class: 'edit', autocomplete: 'off' %>
-          <% unless @user.errors[:customer_id].blank? %>
-            <div class="alert-box error radius">
-              <span><%= @user.errors[:customer_id].join(', ') %></span>
-            </div>
-          <% end %>
-        </div>
-        <div class="field">
-          <%= f.text_field :phone, placeholder: 'Telefono', class: 'edit', autocomplete: 'off' %>
-          <% unless @user.errors[:phone].blank? %>
-            <div class="alert-box error radius">
-              <span><%= @user.errors[:phone].join(', ') %></span>
-            </div>
-          <% end %>
-        </div>
-        <div class="field">
-          <%= f.text_field :email, placeholder: 'Correo', class: 'edit', autocomplete: 'off' %>
-          <% unless @user.errors[:email].blank? %>
-            <div class="alert-box error radius">
-              <span><%= @user.errors[:email].join(', ') %></span>
-            </div>
-          <% end %>
-        </div>
-        <div class="field">
-          <div class="toggle-demo">
-            <label class="edit">Tipo de usuario</label>
-            <div class="switch-toggle switch-3 switch-android edit">
-              <input id="user_rank1" name="user[rank]" type="radio" value="sa" checked="">
-              <label for="user_rank1" style="border-left: 1px solid rgba(63, 64, 65, 1);">Super Administrador</label>
-              <input id="user_rank2" name="user[rank]" type="radio" value="administrador" checked="">
-              <label for="user_rank2" onclick="">Administrador</label>
-              <input id="user_rank3" name="user[rank]" type="radio" value="usuario" checked="">
-              <label for="user_rank3">Usuario</label>
-              <a></a>
-            </div>
+    <div class="col-md-12">
+      <h3 class="text-center">Editar usuario</h3>      
+      <div class="form-user">
+        <%= form_for @user do |f| %>
+          <div class="field">
+            <%= f.text_field :full_name, placeholder: 'Nombre Completo', class: 'edit', autocomplete: 'off' %>
+            <% unless @user.errors[:full_name].blank? %>
+              <div class="alert-box error radius">
+                <span><%= @user.errors[:full_name].join(', ') %></span>
+              </div>
+            <% end %>
           </div>
-          <% unless @user.errors[:rank].blank? %>
-            <div class="alert-box error radius">
-              <span><%= @user.errors[:rank].join(', ') %></span>
+          <div class="field">
+            <%= f.text_field :customer_id, placeholder: 'Identificación', class: 'edit', autocomplete: 'off' %>
+            <% unless @user.errors[:customer_id].blank? %>
+              <div class="alert-box error radius">
+                <span><%= @user.errors[:customer_id].join(', ') %></span>
+              </div>
+            <% end %>
+          </div>
+          <div class="field">
+            <%= f.text_field :phone, placeholder: 'Telefono', class: 'edit', autocomplete: 'off' %>
+            <% unless @user.errors[:phone].blank? %>
+              <div class="alert-box error radius">
+                <span><%= @user.errors[:phone].join(', ') %></span>
+              </div>
+            <% end %>
+          </div>
+          <div class="field">
+            <%= f.text_field :email, placeholder: 'Correo', class: 'edit', autocomplete: 'off' %>
+            <% unless @user.errors[:email].blank? %>
+              <div class="alert-box error radius">
+                <span><%= @user.errors[:email].join(', ') %></span>
+              </div>
+            <% end %>
+          </div>
+          <div class="field">
+            <div class="toggle-demo">
+              <label class="edit">Tipo de usuario</label>
+              <div class="switch-toggle switch-3 switch-android edit">
+                <input id="user_rank1" name="user[rank]" type="radio" value="sa" checked="">
+                <label for="user_rank1" style="border-left: 1px solid rgba(63, 64, 65, 1);">Super Administrador</label>
+                <input id="user_rank2" name="user[rank]" type="radio" value="administrador" checked="">
+                <label for="user_rank2" onclick="">Administrador</label>
+                <input id="user_rank3" name="user[rank]" type="radio" value="usuario" checked="">
+                <label for="user_rank3">Usuario</label>
+                <a></a>
+              </div>
             </div>
-          <% end %>
-        </div>
-        <div class="field">
-          <%= f.password_field :password, placeholder: 'Contraseña', class: 'edit' %>
-          <% unless @user.errors[:password].blank? %>
-            <div class="alert-box error radius">
-              <span><%= @user.errors[:password].join(', ') %></span>
-            </div>
-          <% end %>
-        </div>
-        <div class="field">
-          <%= f.password_field :password_confirmation, placeholder: 'Repetir contraseña', class: 'edit' %>
-          <% unless @user.errors[:password_confirmation].blank? %>
-            <div class="alert-box error radius">
-              <span><%= @user.errors[:password_confirmation].join(', ') %></span>
-            </div>
-          <% end %>
-        </div>
-        <%= f.submit 'Sign Up', class: 'btn btn-primary btn-block main' %>
-      <% end %>
+            <% unless @user.errors[:rank].blank? %>
+              <div class="alert-box error radius">
+                <span><%= @user.errors[:rank].join(', ') %></span>
+              </div>
+            <% end %>
+          </div>
+          <div class="field">
+            <%= f.password_field :password, placeholder: 'Contraseña', class: 'edit' %>
+            <% unless @user.errors[:password].blank? %>
+              <div class="alert-box error radius">
+                <span><%= @user.errors[:password].join(', ') %></span>
+              </div>
+            <% end %>
+          </div>
+          <div class="field">
+            <%= f.password_field :password_confirmation, placeholder: 'Repetir contraseña', class: 'edit' %>
+            <% unless @user.errors[:password_confirmation].blank? %>
+              <div class="alert-box error radius">
+                <span><%= @user.errors[:password_confirmation].join(', ') %></span>
+              </div>
+            <% end %>
+          </div>
+          <%= f.submit 'Sign Up', class: 'btn btn-primary btn-block main' %>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>

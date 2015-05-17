@@ -12,8 +12,8 @@
                 </div>
                 <%= f.hidden_field :incident_id, value: @incident.id %>
                 <div >
-                  <button type="submit"  name="commit"><i class="fa fa-check"></i> Enviar </button>
-                  <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i> Cancelar</button> 
+                  <button type="submit"  name="commit">Enviar </button>
+                  <button type="button" class="md-close" onclick="clear_span()">Cancelar</button> 
                 </div>     
               </form>
             <% end %>       
@@ -37,8 +37,8 @@
                     <span id="error-description-incident"></span>
                   </div>
                   <div>
-                  <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
-                  <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+                  <button type="submit" name="commit">Enviar</input>
+                  <button type="button" class="md-close" onclick="clear_span()">Cancelar</button>  
                 </form>                      
                 </div>
               <% end %> 
@@ -60,16 +60,18 @@
                       <div class="comment-head">
                         <h6 class="comment-name by-author"><a href="#"><%= @incident.title %></a></h6>
                         <span> <%= @incident.created_at %> </span>
-                        <%  if current_user.creator_cases?(@incident.id, 'incident') %> 
-                          <a href=<%= incident_path(@incident) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
-                           <a href="/incidents/<%= @incident.id %>/edit" class="md-trigger" data-modal="modal-9" data-remote="true"><i class="fa fa-pencil"></i></a>
-                        <% end %>
-                        <% if @comments_incidents.empty? %>
-                          <a href='/comments_incidents/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                        <% unless @incident.is_finished? %>
+                          <% if @comments_incidents.empty? %>
+                            <a href='/comments_incidents/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                          <% end %>
+                          <%  if current_user.creator_cases?(@incident.id, 'incident') || current_user.is_sa?  %> 
+                            <a href="/incidents/<%= @incident.id %>/edit" class="md-trigger" data-modal="modal-9" data-remote="true"><i class="fa fa-pencil"></i></a>
+                            <a href=<%= incident_path(@incident) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
+                          <% end %>
                         <% end %>
                       </div>
                       <div class="comment-content">
-                        <%= @incident.description %>
+                        <%= simple_format(@incident.description) %>
                       </div>
                     </div>
                   </div>
@@ -81,16 +83,18 @@
                           <div class="comment-head">
                             <h6 class="comment-name by-author"><a href="#"><%= comments_incident.user.full_name %></a></h6>
                             <span> <%= comments_incident.updated_at %> </span>
-                            <% if current_user.creator_comments?(comments_incident.id, 'incident')%>
-                              <a href=<%= comments_incident_path(comments_incident, incident_id: @incident.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
-                              <a href="/comments_incidents/<%= comments_incident.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
-                            <% end %>
-                            <% if @comments_incidents.size == i + 1 %>
-                              <a href='/comments_incidents/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                            <% unless @incident.is_finished? %>
+                              <% if @comments_incidents.size == i + 1 %>
+                                <a href='/comments_incidents/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                              <% end %>
+                              <% if current_user.creator_comments?(comments_incident.id, 'incident') || current_user.is_sa? %>
+                                <a href="/comments_incidents/<%= comments_incident.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
+                                <a href=<%= comments_incident_path(comments_incident, incident_id: @incident.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
+                              <% end %>
                             <% end %>
                           </div>
                           <div class="comment-content">
-                            <%= comments_incident.description %>
+                            <%= simple_format(comments_incident.description) %>
                           </div>
                         </div>
                       </div>
@@ -103,14 +107,18 @@
                               <div class="comment-head">
                                 <h6 class="comment-name"><a href="#"><%= comments_incident.user.full_name %></a></h6>
                                 <span><%= comments_incident.updated_at %></span>
-                                <i class="fa fa-pencil"></i>
-                                <i class="fa fa-trash-o "></i>
-                                <% if @comments_incidents.size == i + 1 %>
-                                  <a href='/comments_incident/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                                <% unless @incident.is_finished? %>
+                                  <% if @comments_incidents.size == i + 1 %>
+                                    <a href='/comments_incident/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                                  <% end %>
+                                  <% if current_user.creator_comments?(comments_incident.id, 'incident') || current_user.is_sa? %>
+                                    <a href="/comments_incidents/<%= comments_incident.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
+                                    <a href=<%= comments_incident_path(comments_incident, incident_id: @incident.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
+                                  <% end %>
                                 <% end %>
                               </div>
                               <div class="comment-content">
-                                <%= comments_incident.description %>
+                                <%= simple_format(comments_incident.description) %>
                               </div>
                             </div>
                           </div>
@@ -118,7 +126,7 @@
                       </ul>
                     <% end %>
                   <% end %>
-                  <% if current_user.creator_cases?(@incident.id, 'incident') %>
+                <% if current_user.creator_cases?(@incident.id, 'incident') %>
                   <div class="close-case">
                     <% if @incident.state != 'answered' %>
                       <a class ="not-solve" href="/incidents/finished/<%= @incident.id %>" data-method="post">

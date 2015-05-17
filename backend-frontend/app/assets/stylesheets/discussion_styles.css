@@ -9,12 +9,12 @@ i.fa.fa-reply.fa-2x {
 }
 
 .sidebar-closed #main-content {
-  margin-left: 2%;
+  /*margin-left: 2%;*/
 }
 
 .wrapper {
   display: inline-flex;
-  width: 98%;
+  width: 100%;
   padding-left: 8px;
   padding-right: 8px;
 }

@@ -643,6 +643,7 @@ ul.sidebar-menu li a.active i {
     background: #ffd777;
     background: #F8CA14;
     background: #FAD12E;
+    background: #F5DE59;
     border-bottom: 1px solid #c9aa5f;
 }
 
@@ -2476,7 +2477,7 @@ label {
     width: 100%;
     padding: 1rem 2rem;
     position: relative;
-    padding-top: 45px;
+    
 }
 
 .field:not(.compact) {

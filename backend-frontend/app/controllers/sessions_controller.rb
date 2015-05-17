@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to :root, notice: 'Sesion finalizada'
+    redirect_to :root
   end
 end
