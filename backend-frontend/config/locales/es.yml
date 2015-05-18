@@ -9,11 +9,13 @@ es:
             customer_id:
               blank: "Campo vacio"
               not_a_number: 'El campo debe ser numerico'
+              taken: "La identificacion ya existe"
             phone:
               blank: "Campo vacio"
               not_a_number: 'El campo debe ser numerico'
             email:
               blank: "Campo vacio"
+              taken: "El correo ya existe"
             password:
               blank: "Campo vacio"
             password_confirmation:
