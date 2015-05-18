@@ -22,16 +22,10 @@ if Rails.env.development?
   0.upto(rank.sample) { p User.where(rank: ['sa', 'administrador']).sample.comments_problems.build(description: Faker::Lorem.paragraph((10..70).to_a), problem_id: Problem.all.sample.id).save }
   0.upto(rank.sample) { p User.where(rank: ['sa', 'administrador']).sample.comments_incidents.build(description: Faker::Lorem.paragraph((10..70).to_a), incident_id: Incident.all.sample.id).save }
   0.upto(rank.sample) { p User.where(rank: ['sa', 'administrador']).sample.comments_requests.build(description: Faker::Lorem.paragraph((10..70).to_a), request_id: Request.all.sample.id).save }
-  
-=begin
 
-    user = User.new(customer_id: 123456, full_name: Faker::Name.name, email: Faker::Internet.email, 
-                    phone: '30123557', rank: 'sa', 
-                    password: '123456', password_confirmation: '123456').save
-
-=end
 else
-  User.new(customer_id: 123456, full_name: Faker::Name.name, email: Faker::Internet.email, 
+  
+  User.new(customer_id: 123456, full_name: Faker::Name.name, email: Faker::Internet.email,
             phone: Faker::Number.number(8), rank: 'sa',
             password: '123456', password_confirmation: '123456').save
 
