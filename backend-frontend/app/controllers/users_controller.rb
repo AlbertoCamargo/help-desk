@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params_user)
     if @user.save
-      redirect_to :users, notice: 'El usuario se a creado satisfactoriamente'
+      redirect_to :users, notice: 'El usuario se ha creado satisfactoriamente'
     else
       # flash.now[:notice] = 'Error al crear el usuario'
       render :new
@@ -28,9 +28,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.assign_attributes(params_user)
+    @user.assign_attributes(params_user, first_time: true)
     if @user.save
-      redirect_to :users, notice: 'El usuario se a actualizado correctamente'
+      redirect_to :users, notice: 'El usuario se ha actualizado correctamente'
     else
       # flash.now[:notice] = 'Error al actualizar el usuario'
       render :edit
