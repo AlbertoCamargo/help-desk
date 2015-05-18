@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.assign_attributes(params_user, first_time: true)
+    @user.assign_attributes(params_user.merge(first_time: true))
     if @user.save
       redirect_to :users, notice: 'El usuario se ha actualizado correctamente'
     else
