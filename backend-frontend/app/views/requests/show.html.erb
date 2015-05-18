@@ -12,8 +12,8 @@
               </div>
               <%= f.hidden_field :request_id, value: @request.id %>
               <div >
-                <button type="submit"  name="commit"><i class="fa fa-check"></i> Enviar</button>
-                <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i> Cancelar</button> 
+                <button type="submit"  name="commit"> Enviar</button>
+                <button type="button" class="md-close" onclick="clear_span()">Cancelar</button> 
               </div>     
             </form>
           <% end %>       
@@ -37,8 +37,8 @@
                 <span id="error-description-request"></span>
               </div>
               <div>
-              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
-              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+              <button type="submit" name="commit">Enviar</input>
+              <button type="button" class="md-close" onclick="clear_span()">Cancelar</button>  
             </form>                      
             </div>
           <% end %> 
@@ -60,16 +60,18 @@
                     <div class="comment-head">
                       <h6 class="comment-name by-author"><a href="#"><%= @request.title %></a></h6>
                       <span> <%= @request.created_at %> </span>
-                      <%  if current_user.creator_cases?(@request.id, 'request') %> 
-                        <a href=<%= request_path(@request) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
-                         <a href="/requests/<%= @request.id %>/edit" class="md-trigger" data-modal="modal-9" data-remote="true"><i class="fa fa-pencil"></i></a>
-                      <% end %>
-                      <% if @comments_requests.empty? %>
-                        <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                      <% unless @request.is_finished? %>
+                        <% if @comments_requests.empty? %>
+                          <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                        <% end %>
+                        <%  if current_user.creator_cases?(@request.id, 'request') || current_user.is_sa? %> 
+                            <a href="/requests/<%= @request.id %>/edit" class="md-trigger" data-modal="modal-9" data-remote="true"><i class="fa fa-pencil"></i></a>
+                           <a href=<%= request_path(@request) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
+                        <% end %>
                       <% end %>
                     </div>
                     <div class="comment-content">
-                      <%= @request.description %>
+                      <%= simple_format(@request.description) %>
                     </div>
                   </div>
                 </div>
@@ -81,16 +83,18 @@
                         <div class="comment-head">
                           <h6 class="comment-name by-author"><a href="#"><%= comments_request.user.full_name %></a></h6>
                           <span> <%= comments_request.updated_at %> </span>
-                          <% if current_user.creator_comments?(comments_request.id, 'request')%>
-                            <a href=<%= comments_request_path(comments_request, request_id: @request.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
-                            <a href="/comments_requests/<%= comments_request.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
-                          <% end %>
-                          <% if @comments_requests.size == i + 1 %>
-                            <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                          <% unless @request.is_finished? %>
+                            <% if @comments_requests.size == i + 1 %>
+                              <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                            <% end %>
+                            <% if current_user.creator_comments?(comments_request.id, 'request') || current_user.is_sa? %>
+                              <a href="/comments_requests/<%= comments_request.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
+                              <a href=<%= comments_request_path(comments_request, request_id: @request.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
+                            <% end %>
                           <% end %>
                         </div>
                         <div class="comment-content">
-                          <%= comments_request.description %>
+                          <%= simple_format(comments_request.description) %>
                         </div>
                       </div>
                     </div>
@@ -103,14 +107,18 @@
                             <div class="comment-head">
                               <h6 class="comment-name"><a href="#"><%= comments_request.user.full_name %></a></h6>
                               <span><%= comments_request.updated_at %></span>
-                              <i class="fa fa-pencil"></i>
-                              <i class="fa fa-trash-o "></i>
-                              <% if @comments_requests.size == i + 1 %>
-                                <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                              <% unless @request.is_finished? %>
+                                <% if @comments_requests.size == i + 1 %>
+                                  <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
+                                <% end %>
+                                <% if current_user.creator_comments?(comments_request.id, 'request') || current_user.is_sa? %>
+                                  <a href="/comments_requests/<%= comments_request.id %>/edit" class="md-trigger" data-modal="modal-8" data-remote="true"><i class="fa fa-pencil"></i></a>
+                                  <a href=<%= comments_request_path(comments_request, request_id: @request.id) %> data-method="delete" ><i class="fa fa-trash-o" ></i></a>
+                                <% end %>
                               <% end %>
                             </div>
                             <div class="comment-content">
-                              <%= comments_request.description %>
+                              <%= simple_format(comments_request.description) %>
                             </div>
                           </div>
                         </div>
@@ -118,21 +126,30 @@
                     </ul>
                   <% end %>
                 <% end %>
-              </li>
-              <% if current_user.creator_cases?(@request.id, 'request') %>
-                <div class="close-case">
-                  <% if @request.state != 'answered' %>
-                    <a class ="not-solve" href="/finished/<%= @request.id %>" data-method="post">
-                      <i class="fa fa-ban fa-2x"></i>
-                    </a>
-                  <% else %>
-                    <a class ="solve" href="/open/<%= @request.id %>" data-method="post">
-                      <i class="fa fa-ban fa-2x"></i>
-                    </a>
-                    <span> Caso cerrado por <b> <%= @request.user.full_name %> </b> el <b> <%= @request.updated_at %> </b> </span>
+                <% if current_user.creator_cases?(@request.id, 'request') || current_user.is_sa? %>
+                  <div class="close-case">
+                    <% if @request.state != 'answered' %>
+                      <a class ="not-solve" href="/requests/finished/<%= @request.id %>" data-method="post">
+                        <i class="fa fa-ban fa-2x"></i>
+                      </a>
+                    <% else %>
+                      <a class ="solve" href="/requests/open/<%= @request.id %>" data-method="post">
+                        <i class="fa fa-ban fa-2x"></i>
+                      </a>
+                      <span> Caso cerrado el <b> <%= @request.updated_at %> </b> </span>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <% if @request.is_finished? %>
+                    <div class="close-case">
+                      <a class ="solve" href='#'>
+                        <i class="fa fa-ban fa-2x"></i>
+                      </a>
+                      <span> Caso cerrado el <b> <%= @request.updated_at %> </b> </span>
+                    </div>
                   <% end %>
-                </div>
-              <% end %>
+                <% end %>
+              </li>
             </ul>
           </div>
         </div>

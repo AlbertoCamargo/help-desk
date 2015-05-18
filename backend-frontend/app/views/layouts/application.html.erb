@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <title>HELP DESK</title>
+    <title> HELP DESK </title>
     <!-- Bootstrap core CSS -->
     <%= stylesheet_link_tag 'discussion_site_manifest' %>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -20,5 +20,20 @@
   <body>
     <%= yield %>
     <%= javascript_include_tag 'home' %>
+    <span id= 'message' style="display: none;"> <%= flash[:notice] %> </span>
+    <script type="text/javascript">
+      var message = $('#message').text()
+      console.log((message === undefined));
+      console.log(message);
+      console.log($('#message').text())
+      if (!(message.length == 2)) {
+        $.gritter.add({
+              // (string | mandatory) the heading of the notification
+              title: 'Notificación',
+              // (string | mandatory) the text inside the notification
+              text: $('#message').text()
+        });
+      }
+    </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 class IncidentsController < ApplicationController
   
-  before_action :find_incident, only: [:update, :destroy]
+  before_action :find_incident, only: [:update, :destroy, :finished, :open]
 
   def show
     @incident = current_user.is_customer? ? current_user.incidents.find(params[:id]) : Incident.find(params[:id])
@@ -21,28 +21,37 @@ class IncidentsController < ApplicationController
     respond_to do |format|
       @incident = current_user.incidents.build(params_incident)
       @incident.save
+      flash[:notice] = 'Incidente creado exitosamente'
       format.js
     end
   end
 
   def edit
     respond_to do |format|
-      @incident = current_user.incidents.find(params[:id])
+      @incident = Incident.find(params[:id])
       format.js
     end
   end
 
   def update
     respond_to do |format|
-      @incident.assign_attributes(params_incident)
-      @incident.save
-      format.js
+      if current_user.creator_cases?(params[:id], 'incident') || current_user.is_sa?
+        @incident.assign_attributes(params_incident)
+        @incident.save
+        flash[:notice] = 'Se ha actualizado correctamente el incidente'
+        format.js
+      else
+        redirect_to :home
+      end
     end
   end
 
   def destroy
-    @incident.destroy
-    redirect_to :home, notice: 'Se ha eliminado correctamente el incidente'
+    if current_user.creator_cases?(params[:id], 'incident') || current_user.is_sa?
+      @incident.destroy
+      flash[:notice] = 'Incidente eliminado correctamente'
+    end
+    redirect_to :home
   end
 
   def finished
@@ -61,7 +70,7 @@ class IncidentsController < ApplicationController
   end
 
   def find_incident
-    @incident = current_user.incidents.find(params[:id])
+    @incident = Incident.find(params[:id])
   end
 
   def change_state(incident, state)

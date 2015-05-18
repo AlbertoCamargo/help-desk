@@ -9,12 +9,12 @@ i.fa.fa-reply.fa-2x {
 }
 
 .sidebar-closed #main-content {
-  margin-left: 2%;
+  /*margin-left: 2%;*/
 }
 
 .wrapper {
   display: inline-flex;
-  width: 98%;
+  width: 100%;
   padding-left: 8px;
   padding-right: 8px;
 }
@@ -79,7 +79,7 @@ div.comment-main-level {
 .comments-list:before {
   content: '';
   width: 2px;
-  height: 97%;
+  height: 100%;
   background: #c7cacb;
   position: absolute;
   left: 32px;
@@ -94,6 +94,7 @@ div.comment-main-level {
   left: 29px;
   width: 7px;
   height: 7px;
+  top: 100%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
@@ -197,6 +198,7 @@ div.comment-main-level {
 
 .reply-list .comment-box {
   width: 90.5%;
+  word-wrap: break-word;
 }
 .comment-box .comment-head {
   background: #FCFCFC;
@@ -292,7 +294,7 @@ div.comment-main-level {
   position: absolute;
   width: 70%;
   left: 17px;
-  top: 97.5%;
+  top: 100%;
 }
 
 .close-case a {

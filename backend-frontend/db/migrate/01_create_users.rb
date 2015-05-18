@@ -3,11 +3,11 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.integer :customer_id,      null: false
       t.string :full_name,         null: false
-      t.string :email,             null: false
-      t.integer :phone,            null: false
+      t.string :email
+      t.string :phone
       t.string :image
       t.string :rank,              null: false
-      t.boolean :first_time
+      t.boolean :first_time,       default: true
       t.string :crypted_password,  null: false
       t.string :salt,              null: false
 
@@ -24,7 +24,6 @@ class CreateUsers < ActiveRecord::Migration
     end
 
     add_index :users, :customer_id, unique: true
-    add_index :users, :email, unique: true
     add_index :users, :remember_me_token
     add_index :users, :reset_password_token
   end

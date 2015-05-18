@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-
-<!--<% if flash[:notice] %>
-  <%= flash[:notice] %>
-<% end %>
-</br>-->
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -41,8 +36,8 @@
                 <span id="error-description-incident"></span>
               </div>
               <div>
-                <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
-                <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+                <button type="submit" name="commit">Enviar</input>
+                <button type="button" class="md-close" onclick="clear_span()">Cancelar</button>  
               </div>
             </form>                             
           <% end %> 
@@ -62,12 +57,12 @@
               </div>
               <div class="form-group has-success">
                 <label class="col-sm-2 control-label col-lg-2" for="inputWarning">Descripción</label>
-                <%= f.text_area(:description, rows: 12, class: 'form-control' ) %>
+                <%= f.text_area(:description, rows: 12, class: 'form-control') %>
                 <span id="error-description-request"></span>
               </div>
               <div>
-              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
-              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+              <button type="submit" name="commit">Enviar</input>
+              <button type="button" class="md-close" onclick="clear_span()"></i>Cancelar</button>  
             </form>                      
             </div>
           <% end %> 
@@ -91,8 +86,8 @@
                 <span id="error-description-problem"></span>
               </div>
               <div>
-              <button type="submit" name="commit"><i class="fa fa-check"></i>Enviar</input>
-              <button type="button" class="md-close" onclick="clear_span()"><i class="fa fa-times"></i>Cancelar</button>  
+              <button type="submit" name="commit">Enviar</input>
+              <button type="button" class="md-close" onclick="clear_span()">Cancelar</button>  
             </form>                      
             </div>
           <% end %> 
@@ -108,7 +103,7 @@
         <div class="tables">
           <section class="task-panel tasks-widget">
             <div class="panel-heading">
-                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Sugerencias</h5></div><br>
+                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Sugerencias &nbsp &nbsp<span class="badge bg-inverse"><%= @data[:request_finished] %>/<%= @data[:num_request] %></span></h5></div><br>
                 <div class="pull-right hidden-phone"> 
                   <a href='/requests/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-plus"></i></button></a>
                 </div>
@@ -121,9 +116,9 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to request.title, request_path(request) %></span>
                             <div class="pull-right hidden-phone">
-                              <% if current_user.creator_cases?(request.id, 'request') %>
+                              <% if current_user.creator_cases?(request.id, 'request') || current_user.is_sa? %>
                                 <a href="/requests/<%= request.id %>/edit" data-remote="true" ><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-9"><i class="fa fa-pencil"></i></button></a>
-                                <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
+                                <a href=<%= request_path(request) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o " onclick="return confirm('are you sure?')"></i></button></a>
                               <% end %>
                             </div>
                           </div>
@@ -135,7 +130,7 @@
             </section>
             <section class="task-panel tasks-widget">
               <div class="panel-heading">
-                  <div class="pull-left"><h5><i class="fa fa-tasks"></i>Incidentes</h5> </div><br>
+                  <div class="pull-left"><h5><i class="fa fa-tasks"></i>Incidentes &nbsp&nbsp <span class="badge bg-inverse"><%= @data[:incident_finished] %>/<%= @data[:num_incident] %></span></h5></div><br>
                   <div class="pull-right hidden-phone"> 
                     <a href='/incidents/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"> <i class="fa fa-plus"></i></button></a>
                   </div>
@@ -148,7 +143,7 @@
                           <div class="task-title">
                             <span class="task-title-sp"><%= link_to incident.title, incident_path(incident) %></span>
                             <div class="pull-right hidden-phone">
-                              <% if current_user.creator_cases?(incident.id, 'incident') %>
+                              <% if current_user.creator_cases?(incident.id, 'incident') || current_user.is_sa? %>
                                 <a href="/incidents/<%= incident.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-8"><i class="fa fa-pencil"></i></button></a>
                                 <a href=<%=incident_path(incident)%> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                               <% end %>
@@ -162,7 +157,7 @@
             </section>
             <section class="task-panel tasks-widget">
             <div class="panel-heading">
-                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Problemas</h5></div><br>
+                <div class="pull-left"><h5><i class="fa fa-tasks"></i> Problemas &nbsp&nbsp <span class="badge bg-inverse"><%= @data[:problem_finished] %>/<%= @data[:num_problem] %></span></h5></div><br>
                 <div class="pull-right hidden-phone"> 
                   <a href='/problems/new' data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-plus"></i></button></a>
                 </div>
@@ -175,7 +170,7 @@
                         <div class="task-title">
                           <span class="task-title-sp"><%= link_to problem.title, problem_path(problem) %></span>
                           <div class="pull-right hidden-phone">
-                            <% if current_user.creator_cases?(problem.id, 'problem') %>
+                            <% if current_user.creator_cases?(problem.id, 'problem') || current_user.is_sa? %>
                               <a href="/problems/<%= problem.id %>/edit" data-remote="true"><button class="btn btn-primary btn-xs md-trigger" data-modal="modal-10"><i class="fa fa-pencil"></i></button></a>
                               <a href=<%= problem_path(problem) %> data-method="delete"><button class="btn btn-danger btn-xs "><i class="fa fa-trash-o "></i></button></a>
                             <% end %>
@@ -191,5 +186,20 @@
       </div>
     </section>
     <%= javascript_include_tag 'home' %>
+    <span id= 'message' style="display: none;"> <%= flash[:notice] %> </span>
+    <script type="text/javascript">
+      var message = $('#message').text()
+      console.log((message === undefined));
+      console.log(message);
+      console.log($('#message').text())
+      if (!(message.length == 2)) {
+        $.gritter.add({
+              // (string | mandatory) the heading of the notification
+              title: '',
+              // (string | mandatory) the text inside the notification
+              text: $('#message').text()
+        });
+      }
+    </script>
   </body>
 </html>

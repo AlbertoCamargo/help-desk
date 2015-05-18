@@ -1,6 +1,6 @@
 class RequestsController < ApplicationController
   
-  before_action :find_request, only: [:update, :destroy]
+  before_action :find_request, only: [:update, :destroy, :finished, :open]
 
   def show
     @request = current_user.is_customer? ? current_user.requests.find(params[:id]) : Request.find(params[:id])
@@ -21,28 +21,38 @@ class RequestsController < ApplicationController
     respond_to do |format|
       @request = current_user.requests.build(params_request)
       @request.save
+      flash[:notice] = 'Sugerencia creada exitosamente'
       format.js  
     end
   end
 
   def edit
     respond_to do |format|
-      @request = current_user.requests.find(params[:id])
+      @request = Request.find(params[:id])
       format.js
     end
   end
 
   def update
     respond_to do |format|
-      @request.assign_attributes(params_request)
-      @request.save
-      format.js
+      if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
+        @request.assign_attributes(params_request)
+        @request.save
+        flash[:notice] = 'Se ha actualizado correctamente la sugerencia'
+        format.js
+      else
+        redirect_to :home
+      end
+      
     end
   end
 
   def destroy
-    @request.destroy
-    redirect_to :home, notice: 'Se ha eliminado correctamente la sugerencia'
+    if current_user.creator_cases?(params[:id], 'request') || current_user.is_sa?
+      @request.destroy
+      flash[:notice] = 'Sugerencia eliminada correctamente'
+    end
+    redirect_to :home
   end
 
   def finished
@@ -61,7 +71,7 @@ class RequestsController < ApplicationController
   end
 
   def find_request
-    @request = current_user.requests.find(params[:id])
+    @request = Request.find(params[:id])
   end
 
   def change_state(request, state)

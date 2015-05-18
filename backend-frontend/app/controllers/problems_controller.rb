@@ -21,28 +21,37 @@ class ProblemsController < ApplicationController
     respond_to do |format|
       @problem = current_user.problems.build(problem_params)
       @problem.save
+      flash[:notice] = 'Problema creado exitosamente'
       format.js
     end
   end
 
   def edit
     respond_to do |format|
-      @problem = current_user.problems.find(params[:id])
+      @problem = Problem.find(params[:id])
       format.js
     end
   end
 
   def update
     respond_to do |format|
-  	  @problem.assign_attributes(problem_params)
-  	  @problem.save
-      format.js
+      if current_user.creator_cases?(params[:id], 'problem') || current_user.is_sa?
+    	  @problem.assign_attributes(problem_params)
+    	  @problem.save
+        flash[:notice] = 'Se ha actualizado correctamente el problema'
+        format.js
+      else
+        redirect_to :home
+      end
     end
   end
 
   def destroy
-  	@problem.destroy
-  	redirect_to :home
+    if current_user.creator_cases?(params[:id], 'problem') || current_user.is_sa?
+    	@problem.destroy
+      flash[:notice] = 'Problema eliminado correctamente'
+    end
+    redirect_to :home
   end
 
   def finished
@@ -61,7 +70,7 @@ class ProblemsController < ApplicationController
   end
 
   def find_problem
-  	@problem = current_user.problems.find(params[:id])
+  	@problem = Problem.find(params[:id])
   end
 
   def change_state(problem, state)
