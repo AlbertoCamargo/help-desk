@@ -30,4 +30,9 @@ if Rails.env.development?
                     password: '123456', password_confirmation: '123456').save
 
 =end
+else
+  User.new(customer_id: 123456, full_name: Faker::Name.name, email: Faker::Internet.email, 
+            phone: Faker::Number.number(8), rank: 'sa',
+            password: '123456', password_confirmation: '123456').save
+
 end
