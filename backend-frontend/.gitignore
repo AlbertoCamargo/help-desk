@@ -15,5 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
+
 # Ignore .fuse_hidden files
 *.fuse_hidden*
