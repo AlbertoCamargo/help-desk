@@ -1,1 +1,0 @@
-write information about project
