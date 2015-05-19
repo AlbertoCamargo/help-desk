@@ -59,7 +59,7 @@
               <div class="comment-box">
                 <div class="comment-head">
                   <h6 class="comment-name by-author"><a href="#"><%= @problem.title %></a></h6>
-                  <span> <%= @problem.created_at %> </span>
+                  <span> <%= @problem.created_at.to_formatted_s(:long) %> </span>
                   <% unless @problem.is_finished? %>
                     <% if current_user.creator_cases?(@problem.id, 'problem') || current_user.is_sa? %> 
                       <a href=<%= problem_path(@problem) %> data-method="delete"><i class="fa fa-trash-o "></i></a>
@@ -82,7 +82,7 @@
                   <div class="comment-box">
                     <div class="comment-head">
                       <h6 class="comment-name by-author"><a href="#"><%= comments_problem.user.full_name %></a></h6>
-                      <span> <%= comments_problem.updated_at %> </span>
+                      <span> <%= comments_problem.updated_at.to_formatted_s(:long) %> </span>
                       <% unless @problem.is_finished? %>
                         <% if @comments_problems.size == i + 1 %>
                           <a href='/comments_problems/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
@@ -106,7 +106,7 @@
                       <div class="comment-box">
                         <div class="comment-head">
                           <h6 class="comment-name"><a href="#"><%= comments_problem.user.full_name %></a></h6>
-                          <span><%= comments_problem.updated_at %></span>
+                          <span><%= comments_problem.updated_at.to_formatted_s(:long) %></span>
                           <% unless @problem.is_finished? %>
                             <% if @comments_problems.size == i + 1 %>
                               <a href='/comments_problems/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
@@ -136,7 +136,7 @@
                   <a class ="solve" href="/problems/open/<%= @problem.id %>" data-method="post">
                     <i class="fa fa-ban fa-2x"></i>
                   </a>
-                  <span> Caso cerrado el <b> <%= @problem.updated_at %> </b> </span>
+                  <span> Caso cerrado el <b> <%= @problem.updated_at.to_formatted_s(:long) %> </b> </span>
                 <% end %>
               </div>
             <% else %>
@@ -145,7 +145,7 @@
                   <a class ="solve" href='#' >
                     <i class="fa fa-ban fa-2x"></i>
                   </a>
-                  <span> Caso cerrado el <b> <%= @problem.updated_at %> </b> </span>
+                  <span> Caso cerrado el <b> <%= @problem.updated_at.to_formatted_s(:long) %> </b> </span>
                 </div>
               <% end %>
             <% end %>

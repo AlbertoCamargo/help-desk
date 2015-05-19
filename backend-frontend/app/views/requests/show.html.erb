@@ -59,7 +59,7 @@
                   <div class="comment-box">
                     <div class="comment-head">
                       <h6 class="comment-name by-author"><a href="#"><%= @request.title %></a></h6>
-                      <span> <%= @request.created_at %> </span>
+                      <span> <%= @request.created_at.to_formatted_s(:long) %> </span>
                       <% unless @request.is_finished? %>
                         <% if @comments_requests.empty? %>
                           <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
@@ -82,7 +82,7 @@
                       <div class="comment-box">
                         <div class="comment-head">
                           <h6 class="comment-name by-author"><a href="#"><%= comments_request.user.full_name %></a></h6>
-                          <span> <%= comments_request.updated_at %> </span>
+                          <span> <%= comments_request.updated_at.to_formatted_s(:long) %> </span>
                           <% unless @request.is_finished? %>
                             <% if @comments_requests.size == i + 1 %>
                               <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
@@ -106,7 +106,7 @@
                           <div class="comment-box">
                             <div class="comment-head">
                               <h6 class="comment-name"><a href="#"><%= comments_request.user.full_name %></a></h6>
-                              <span><%= comments_request.updated_at %></span>
+                              <span><%= comments_request.updated_at.to_formatted_s(:long) %></span>
                               <% unless @request.is_finished? %>
                                 <% if @comments_requests.size == i + 1 %>
                                   <a href='/comments_requests/new' data-remote="true" class="md-trigger" data-modal="modal-8"> <i class="fa fa-reply fa-1x"></i></a>
@@ -136,7 +136,7 @@
                       <a class ="solve" href="/requests/open/<%= @request.id %>" data-method="post">
                         <i class="fa fa-ban fa-2x"></i>
                       </a>
-                      <span> Caso cerrado el <b> <%= @request.updated_at %> </b> </span>
+                      <span> Caso cerrado el <b> <%= @request.updated_at.to_formatted_s(:long) %> </b> </span>
                     <% end %>
                   </div>
                 <% else %>
@@ -145,7 +145,7 @@
                       <a class ="solve" href='#'>
                         <i class="fa fa-ban fa-2x"></i>
                       </a>
-                      <span> Caso cerrado el <b> <%= @request.updated_at %> </b> </span>
+                      <span> Caso cerrado el <b> <%= @request.updated_at.to_formatted_s(:long) %> </b> </span>
                     </div>
                   <% end %>
                 <% end %>
